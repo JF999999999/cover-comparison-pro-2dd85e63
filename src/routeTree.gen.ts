@@ -9,8 +9,68 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VorteileRouteImport } from './routes/vorteile'
+import { Route as VergleichRouteImport } from './routes/vergleich'
+import { Route as UeberUnsRouteImport } from './routes/ueber-uns'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as RatgeberRouteImport } from './routes/ratgeber'
+import { Route as ModelleRouteImport } from './routes/modelle'
+import { Route as KontaktRouteImport } from './routes/kontakt'
+import { Route as ImpressumRouteImport } from './routes/impressum'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as DatenschutzRouteImport } from './routes/datenschutz'
 import { Route as IndexRouteImport } from './routes/index'
 
+const VorteileRoute = VorteileRouteImport.update({
+  id: '/vorteile',
+  path: '/vorteile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VergleichRoute = VergleichRouteImport.update({
+  id: '/vergleich',
+  path: '/vergleich',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UeberUnsRoute = UeberUnsRouteImport.update({
+  id: '/ueber-uns',
+  path: '/ueber-uns',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RatgeberRoute = RatgeberRouteImport.update({
+  id: '/ratgeber',
+  path: '/ratgeber',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ModelleRoute = ModelleRouteImport.update({
+  id: '/modelle',
+  path: '/modelle',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KontaktRoute = KontaktRouteImport.update({
+  id: '/kontakt',
+  path: '/kontakt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImpressumRoute = ImpressumRouteImport.update({
+  id: '/impressum',
+  path: '/impressum',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DatenschutzRoute = DatenschutzRouteImport.update({
+  id: '/datenschutz',
+  path: '/datenschutz',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +79,172 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/faq': typeof FaqRoute
+  '/impressum': typeof ImpressumRoute
+  '/kontakt': typeof KontaktRoute
+  '/modelle': typeof ModelleRoute
+  '/ratgeber': typeof RatgeberRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/ueber-uns': typeof UeberUnsRoute
+  '/vergleich': typeof VergleichRoute
+  '/vorteile': typeof VorteileRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/faq': typeof FaqRoute
+  '/impressum': typeof ImpressumRoute
+  '/kontakt': typeof KontaktRoute
+  '/modelle': typeof ModelleRoute
+  '/ratgeber': typeof RatgeberRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/ueber-uns': typeof UeberUnsRoute
+  '/vergleich': typeof VergleichRoute
+  '/vorteile': typeof VorteileRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/faq': typeof FaqRoute
+  '/impressum': typeof ImpressumRoute
+  '/kontakt': typeof KontaktRoute
+  '/modelle': typeof ModelleRoute
+  '/ratgeber': typeof RatgeberRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/ueber-uns': typeof UeberUnsRoute
+  '/vergleich': typeof VergleichRoute
+  '/vorteile': typeof VorteileRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/datenschutz'
+    | '/faq'
+    | '/impressum'
+    | '/kontakt'
+    | '/modelle'
+    | '/ratgeber'
+    | '/sitemap.xml'
+    | '/ueber-uns'
+    | '/vergleich'
+    | '/vorteile'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/datenschutz'
+    | '/faq'
+    | '/impressum'
+    | '/kontakt'
+    | '/modelle'
+    | '/ratgeber'
+    | '/sitemap.xml'
+    | '/ueber-uns'
+    | '/vergleich'
+    | '/vorteile'
+  id:
+    | '__root__'
+    | '/'
+    | '/datenschutz'
+    | '/faq'
+    | '/impressum'
+    | '/kontakt'
+    | '/modelle'
+    | '/ratgeber'
+    | '/sitemap.xml'
+    | '/ueber-uns'
+    | '/vergleich'
+    | '/vorteile'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DatenschutzRoute: typeof DatenschutzRoute
+  FaqRoute: typeof FaqRoute
+  ImpressumRoute: typeof ImpressumRoute
+  KontaktRoute: typeof KontaktRoute
+  ModelleRoute: typeof ModelleRoute
+  RatgeberRoute: typeof RatgeberRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  UeberUnsRoute: typeof UeberUnsRoute
+  VergleichRoute: typeof VergleichRoute
+  VorteileRoute: typeof VorteileRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/vorteile': {
+      id: '/vorteile'
+      path: '/vorteile'
+      fullPath: '/vorteile'
+      preLoaderRoute: typeof VorteileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vergleich': {
+      id: '/vergleich'
+      path: '/vergleich'
+      fullPath: '/vergleich'
+      preLoaderRoute: typeof VergleichRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ueber-uns': {
+      id: '/ueber-uns'
+      path: '/ueber-uns'
+      fullPath: '/ueber-uns'
+      preLoaderRoute: typeof UeberUnsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ratgeber': {
+      id: '/ratgeber'
+      path: '/ratgeber'
+      fullPath: '/ratgeber'
+      preLoaderRoute: typeof RatgeberRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/modelle': {
+      id: '/modelle'
+      path: '/modelle'
+      fullPath: '/modelle'
+      preLoaderRoute: typeof ModelleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kontakt': {
+      id: '/kontakt'
+      path: '/kontakt'
+      fullPath: '/kontakt'
+      preLoaderRoute: typeof KontaktRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/impressum': {
+      id: '/impressum'
+      path: '/impressum'
+      fullPath: '/impressum'
+      preLoaderRoute: typeof ImpressumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/datenschutz': {
+      id: '/datenschutz'
+      path: '/datenschutz'
+      fullPath: '/datenschutz'
+      preLoaderRoute: typeof DatenschutzRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,17 +257,17 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DatenschutzRoute: DatenschutzRoute,
+  FaqRoute: FaqRoute,
+  ImpressumRoute: ImpressumRoute,
+  KontaktRoute: KontaktRoute,
+  ModelleRoute: ModelleRoute,
+  RatgeberRoute: RatgeberRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  UeberUnsRoute: UeberUnsRoute,
+  VergleichRoute: VergleichRoute,
+  VorteileRoute: VorteileRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
