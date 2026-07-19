@@ -47,7 +47,7 @@ function Home() {
 
         <div className="container-x flex min-h-[86vh] flex-col justify-end pb-16 pt-32 text-white md:min-h-[92vh] md:pb-24">
           <span className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs uppercase tracking-widest text-white/90 backdrop-blur fade-up">
-            <Sparkles className="h-3.5 w-3.5" /> Unabhängiger Vergleich · Partner von Paradiso
+            <Sparkles className="h-3.5 w-3.5" /> Unabhängiger Vergleich · Hersteller im Überblick
           </span>
           <h1 className="max-w-4xl text-balance text-4xl leading-[1.02] md:text-7xl fade-up">
             Die besten Poolüberdachungen im Vergleich
