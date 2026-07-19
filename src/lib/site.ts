@@ -1,6 +1,6 @@
 export const SITE_NAME = "Poolüberdachung Vergleich";
 export const SITE_TAGLINE = "Der unabhängige Vergleich für Poolüberdachungen";
-export const PARADISO_URL = "https://www.paradiso-poolueberdachungen.de";
+export const PARADISO_URL = "https://www.paradiso.tv/";
 
 export const NAV_LINKS = [
   { to: "/", label: "Startseite" },
