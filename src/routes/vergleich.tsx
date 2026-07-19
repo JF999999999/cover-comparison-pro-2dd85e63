@@ -107,12 +107,12 @@ const rows: Row[] = [
   },
 ];
 
-const providers = [
+const providers: { key: "paradiso" | "a" | "b" | "c"; label: string; highlight: boolean; tag?: string }[] = [
   { key: "paradiso", label: "Paradiso", highlight: true, tag: "Empfehlung" },
   { key: "a", label: "Anbieter A", highlight: false },
   { key: "b", label: "Anbieter B", highlight: false },
   { key: "c", label: "Anbieter C", highlight: false },
-] as const;
+];
 
 function CellView({ cell }: { cell: Cell }) {
   return (
