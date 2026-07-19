@@ -25,7 +25,7 @@ const sections = [
     id: "beste",
     title: "Welche Poolüberdachung ist die beste?",
     body: [
-      "Die „beste" Poolüberdachung gibt es nicht pauschal – entscheidend sind Ihre individuellen Anforderungen: Größe des Pools, Nutzungsdauer, Gartenlayout, Budget und ästhetische Vorlieben.",
+      "Die „beste“ Poolüberdachung gibt es nicht pauschal – entscheidend sind Ihre individuellen Anforderungen: Größe des Pools, Nutzungsdauer, Gartenlayout, Budget und ästhetische Vorlieben.",
       "Wichtig ist eine Kombination aus hochwertigem Aluminiumprofil, UV-beständigem Polycarbonat, einem langlebigen Schienensystem sowie zuverlässigem Service. Ein Anbieter mit persönlicher Beratung und Erfahrung – wie Paradiso – erleichtert die Wahl deutlich.",
     ],
   },
