@@ -3,6 +3,8 @@ import { Check, X } from "lucide-react";
 import heroFlach from "@/assets/model-flach.jpg";
 import heroMittel from "@/assets/model-mittel.jpg";
 import heroHoch from "@/assets/model-hoch.jpg";
+import heroBegehbar from "@/assets/model-begehbar.jpg";
+import heroSchiebe from "@/assets/model-schiebe.jpg";
 import { PageHero } from "@/components/site/PageHero";
 import { CTASection } from "@/components/site/CTA";
 
@@ -98,6 +100,7 @@ const models: Model[] = [
   {
     id: "begehbar",
     name: "Begehbare Modelle",
+    image: heroBegehbar,
     claim: "Komfort und Bewegungsfreiheit.",
     description:
       "Begehbare Überdachungen bieten ausreichend Kopffreiheit, um bequem um den Pool herumzugehen. Sie eignen sich hervorragend für Familien und Poolbetreiber, die viel Zeit am Wasser verbringen.",
@@ -116,6 +119,7 @@ const models: Model[] = [
   {
     id: "schiebe",
     name: "Schiebeüberdachungen",
+    image: heroSchiebe,
     claim: "Flexibel öffnen und schließen.",
     description:
       "Schiebeüberdachungen bestehen aus mehreren, ineinander schiebbaren Segmenten. So lässt sich der Pool je nach Wetter und Wunsch teilweise oder vollständig öffnen.",
