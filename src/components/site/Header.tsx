@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
-import { NAV_LINKS, PARADISO_URL, SITE_NAME } from "@/lib/site";
+import { Menu, X, Award, ExternalLink } from "lucide-react";
+import { NAV_LINKS, PARADISO_URL, PARADISO_REFERENZEN_URL, SITE_NAME } from "@/lib/site";
 
 export function Header() {
   const [open, setOpen] = useState(false);
