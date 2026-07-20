@@ -20,6 +20,21 @@ export function Header() {
         scrolled ? "glass border-b border-border/60" : "bg-transparent"
       }`}
     >
+      <a
+        href={PARADISO_REFERENZEN_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group block bg-primary text-primary-foreground"
+      >
+        <div className="container-x flex h-10 items-center justify-center gap-2 text-xs sm:text-sm">
+          <Award className="h-4 w-4 shrink-0 text-accent" />
+          <span className="truncate">
+            <span className="font-medium">Beispielprojekte ansehen</span>
+            <span className="hidden sm:inline text-primary-foreground/70"> — Paradiso Referenzanlagen &amp; EUSA-Award-Gewinner</span>
+          </span>
+          <ExternalLink className="h-3.5 w-3.5 shrink-0 opacity-70 transition-transform group-hover:translate-x-0.5" />
+        </div>
+      </a>
       <div className="container-x flex h-16 items-center justify-between gap-4 md:h-20">
         <Link to="/" className="group flex min-w-0 items-center gap-2.5">
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary text-primary-foreground">
