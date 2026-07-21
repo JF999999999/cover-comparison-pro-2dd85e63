@@ -1,11 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ShieldCheck, Sparkles, Sun, Droplets, Lock, TrendingUp } from "lucide-react";
+import { ArrowRight, ExternalLink, ShieldCheck, Sparkles, Sun, Droplets, Lock, TrendingUp } from "lucide-react";
 import heroPool from "@/assets/hero-pool.jpg";
-import modelFlach from "@/assets/model-flach.jpg";
-import modelMittel from "@/assets/model-mittel.jpg";
-import modelHoch from "@/assets/model-hoch.jpg";
-import modelBegehbar from "@/assets/model-begehbar.jpg";
-import modelSchiebe from "@/assets/model-schiebe.jpg";
+import mfgParadiso from "@/assets/mfg-paradiso.jpg.asset.json";
+import mfgAlukov from "@/assets/mfg-alukov.webp.asset.json";
+import mfgAluna from "@/assets/mfg-aluna.jpg.asset.json";
+import mfgObru from "@/assets/mfg-obru.jpg.asset.json";
 
 const TITLE = "Die besten Poolüberdachungen im Vergleich | Unabhängiger Ratgeber";
 const DESCRIPTION =
