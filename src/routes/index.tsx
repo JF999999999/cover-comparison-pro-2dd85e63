@@ -138,7 +138,7 @@ function Home() {
         </div>
       </section>
 
-      {/* Model preview strip – now with images */}
+      {/* Model preview strip */}
       <section className="container-x py-8 md:py-16">
         <div className="mb-10">
           <span className="text-xs font-medium uppercase tracking-widest text-accent">
@@ -151,57 +151,65 @@ function Home() {
             <Link
               key={m.to}
               to={m.to as any}
-              className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-white transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-elegant)]"
+              className="group relative overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-white to-mist p-8 transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-elegant)]"
             >
-              <div className="aspect-[4/3] overflow-hidden">
-                <img
-                  src={m.img}
-                  alt={m.alt}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+              <div className="absolute right-6 top-6 text-muted-foreground transition-transform group-hover:translate-x-1">
+                <ArrowRight className="h-5 w-5" />
               </div>
-              <div className="flex flex-1 flex-col p-6">
-                <h3 className="text-xl font-semibold">{m.title}</h3>
-                <p className="mt-2 max-w-xs text-sm text-muted-foreground">{m.text}</p>
-                <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">
-                  Mehr erfahren
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </span>
-              </div>
+              <h3 className="text-xl font-semibold">{m.title}</h3>
+              <p className="mt-2 max-w-xs text-sm text-muted-foreground">{m.text}</p>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* Gallery */}
+      {/* Hersteller im Überblick */}
       <section className="container-x py-16 md:py-24">
         <div className="mb-10 max-w-2xl">
           <span className="text-xs font-medium uppercase tracking-widest text-accent">
-            Impressionen
+            Hersteller im Überblick
           </span>
-          <h2 className="mt-3 text-3xl md:text-5xl">Poolüberdachungen in der Praxis</h2>
+          <h2 className="mt-3 text-3xl md:text-5xl">Vier Anbieter, ein Beispielbild</h2>
           <p className="mt-4 text-muted-foreground md:text-lg">
-            Ein visueller Eindruck verschiedener Bauformen – von flach und puristisch bis
-            hoch und begehbar.
+            Ein visueller Eindruck der wichtigsten Hersteller in unserem Vergleich – jeweils
+            mit einem repräsentativen Beispiel.
           </p>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {galleryImages.map((g, i) => (
-            <div
-              key={i}
-              className="group relative aspect-square overflow-hidden rounded-2xl border border-border bg-mist"
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {manufacturers.map((m) => (
+            <a
+              key={m.name}
+              href={m.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-[var(--shadow-soft)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-elegant)]"
             >
-              <img
-                src={g.src}
-                alt={g.alt}
-                loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-            </div>
+              <div className="aspect-[4/3] overflow-hidden bg-mist">
+                <img
+                  src={m.img}
+                  alt={`Beispielbild einer Poolüberdachung von ${m.name}`}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+              <div className="flex flex-1 flex-col p-5">
+                <div className="flex items-center justify-between gap-2">
+                  <h3 className="font-display text-xl text-foreground">{m.name}</h3>
+                  <ExternalLink className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary" />
+                </div>
+                <div className="mt-1 text-[11px] uppercase tracking-widest text-muted-foreground">
+                  {m.origin}
+                </div>
+                <p className="mt-3 text-sm text-muted-foreground">{m.note}</p>
+              </div>
+            </a>
           ))}
         </div>
+        <p className="mt-6 text-xs text-muted-foreground">
+          Bildquellen: offizielle Herstellerseiten. Verlinkt zu Informationszwecken.
+        </p>
       </section>
+
 
       {/* Trust / transparency */}
       <section className="container-x my-16">
