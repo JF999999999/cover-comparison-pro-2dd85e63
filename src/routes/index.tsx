@@ -1,10 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ShieldCheck, Sparkles, Sun, Droplets, Lock, TrendingUp } from "lucide-react";
 import heroPool from "@/assets/hero-pool.jpg";
-import { PARADISO_URL } from "@/lib/site";
-import { CTASection } from "@/components/site/CTA";
+import modelFlach from "@/assets/model-flach.jpg";
+import modelMittel from "@/assets/model-mittel.jpg";
+import modelHoch from "@/assets/model-hoch.jpg";
+import modelBegehbar from "@/assets/model-begehbar.jpg";
+import modelSchiebe from "@/assets/model-schiebe.jpg";
 
-const TITLE = "Die besten Poolüberdachungen im Vergleich | Paradiso Partner";
+const TITLE = "Die besten Poolüberdachungen im Vergleich | Unabhängiger Ratgeber";
 const DESCRIPTION =
   "Poolüberdachungen im großen Vergleich: Materialien, Qualität, Ausstattung und Preis-Leistung. Modellübersicht, Kaufratgeber und Empfehlungen.";
 
@@ -27,6 +30,19 @@ const benefits = [
   { icon: Droplets, title: "Sauberes Wasser", text: "Weniger Laub, Schmutz und Verdunstung – geringerer Reinigungsaufwand." },
   { icon: Lock, title: "Mehr Sicherheit", text: "Zusätzlicher Schutz für Kinder und Haustiere bei geschlossener Überdachung." },
   { icon: TrendingUp, title: "Werterhalt", text: "Ein gepflegter Pool steigert die Attraktivität und den Wert Ihres Gartens." },
+];
+
+const modelPreviews = [
+  { title: "Flache Modelle", text: "Diskret, elegant, ideal für moderne Gärten.", to: "/modelle#flach", img: modelFlach, alt: "Flache Poolüberdachung aus Aluminium und Glas" },
+  { title: "Mittelhohe Modelle", text: "Guter Kompromiss aus Komfort und Optik.", to: "/modelle#mittel", img: modelMittel, alt: "Mittelhohe Poolüberdachung über einem Gartenpool" },
+  { title: "Hohe & begehbare Modelle", text: "Maximaler Komfort, ganzjährig nutzbar.", to: "/modelle#hoch", img: modelHoch, alt: "Hohe, begehbare Poolüberdachung mit Glasfront" },
+];
+
+const galleryImages = [
+  { src: modelSchiebe, alt: "Schiebe-Poolüberdachung geöffnet" },
+  { src: modelBegehbar, alt: "Begehbare Poolüberdachung mit Aluminiumprofilen" },
+  { src: modelFlach, alt: "Elegante flache Poolüberdachung" },
+  { src: modelMittel, alt: "Mittelhohe Poolüberdachung im Garten" },
 ];
 
 function Home() {
@@ -64,14 +80,12 @@ function Home() {
               Jetzt vergleichen
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
-            <a
-              href={PARADISO_URL}
-              target="_blank"
-              rel="noopener noreferrer sponsored"
+            <Link
+              to="/modelle"
               className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur transition-colors hover:bg-white/15"
             >
-              Zur Paradiso Website
-            </a>
+              Modelle entdecken
+            </Link>
           </div>
 
           {/* Trust strip */}
@@ -125,25 +139,67 @@ function Home() {
         </div>
       </section>
 
-      {/* Model preview strip */}
+      {/* Model preview strip – now with images */}
       <section className="container-x py-8 md:py-16">
+        <div className="mb-10">
+          <span className="text-xs font-medium uppercase tracking-widest text-accent">
+            Modellübersicht
+          </span>
+          <h2 className="mt-3 text-3xl md:text-5xl">Für jeden Garten die passende Bauart</h2>
+        </div>
         <div className="grid gap-6 md:grid-cols-3">
-          {[
-            { title: "Flache Modelle", text: "Diskret, elegant, ideal für moderne Gärten.", to: "/modelle#flach" },
-            { title: "Mittelhohe Modelle", text: "Guter Kompromiss aus Komfort und Optik.", to: "/modelle#mittel" },
-            { title: "Hohe & begehbare Modelle", text: "Maximaler Komfort, ganzjährig nutzbar.", to: "/modelle#hoch" },
-          ].map((m) => (
+          {modelPreviews.map((m) => (
             <Link
               key={m.to}
               to={m.to as any}
-              className="group relative overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-white to-mist p-8 transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-elegant)]"
+              className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-white transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-elegant)]"
             >
-              <div className="absolute right-6 top-6 text-muted-foreground transition-transform group-hover:translate-x-1">
-                <ArrowRight className="h-5 w-5" />
+              <div className="aspect-[4/3] overflow-hidden">
+                <img
+                  src={m.img}
+                  alt={m.alt}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
               </div>
-              <h3 className="text-xl font-semibold">{m.title}</h3>
-              <p className="mt-2 max-w-xs text-sm text-muted-foreground">{m.text}</p>
+              <div className="flex flex-1 flex-col p-6">
+                <h3 className="text-xl font-semibold">{m.title}</h3>
+                <p className="mt-2 max-w-xs text-sm text-muted-foreground">{m.text}</p>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">
+                  Mehr erfahren
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </span>
+              </div>
             </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Gallery */}
+      <section className="container-x py-16 md:py-24">
+        <div className="mb-10 max-w-2xl">
+          <span className="text-xs font-medium uppercase tracking-widest text-accent">
+            Impressionen
+          </span>
+          <h2 className="mt-3 text-3xl md:text-5xl">Poolüberdachungen in der Praxis</h2>
+          <p className="mt-4 text-muted-foreground md:text-lg">
+            Ein visueller Eindruck verschiedener Bauformen – von flach und puristisch bis
+            hoch und begehbar.
+          </p>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {galleryImages.map((g, i) => (
+            <div
+              key={i}
+              className="group relative aspect-square overflow-hidden rounded-2xl border border-border bg-mist"
+            >
+              <img
+                src={g.src}
+                alt={g.alt}
+                loading="lazy"
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+            </div>
           ))}
         </div>
       </section>
@@ -158,17 +214,21 @@ function Home() {
             <div className="min-w-0">
               <h2 className="text-2xl md:text-3xl">Transparent und ehrlich</h2>
               <p className="mt-3 text-muted-foreground md:text-lg">
-                Diese Website wird in Zusammenarbeit mit Paradiso betrieben. Wir vergleichen
-                nach nachvollziehbaren Kriterien und veröffentlichen nur Aussagen, die sich
-                auf öffentlich zugängliche Informationen stützen. Wo Daten fehlen, weisen wir
-                das ausdrücklich aus, statt Spitzenplatzierungen zu behaupten.
+                Wir vergleichen nach nachvollziehbaren Kriterien und veröffentlichen nur Aussagen,
+                die sich auf öffentlich zugängliche Informationen stützen. Wo Daten fehlen, weisen
+                wir das ausdrücklich aus, statt Spitzenplatzierungen zu behaupten.
               </p>
+              <Link
+                to="/vergleich"
+                className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-[var(--shadow-soft)] transition-all hover:-translate-y-0.5"
+              >
+                Zum Vergleich
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
           </div>
         </div>
       </section>
-
-      <CTASection />
     </>
   );
 }
