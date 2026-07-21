@@ -32,16 +32,16 @@ const benefits = [
 ];
 
 const modelPreviews = [
-  { title: "Flache Modelle", text: "Diskret, elegant, ideal für moderne Gärten.", to: "/modelle#flach", img: modelFlach, alt: "Flache Poolüberdachung aus Aluminium und Glas" },
-  { title: "Mittelhohe Modelle", text: "Guter Kompromiss aus Komfort und Optik.", to: "/modelle#mittel", img: modelMittel, alt: "Mittelhohe Poolüberdachung über einem Gartenpool" },
-  { title: "Hohe & begehbare Modelle", text: "Maximaler Komfort, ganzjährig nutzbar.", to: "/modelle#hoch", img: modelHoch, alt: "Hohe, begehbare Poolüberdachung mit Glasfront" },
+  { title: "Flache Modelle", text: "Diskret, elegant, ideal für moderne Gärten.", to: "/modelle#flach" },
+  { title: "Mittelhohe Modelle", text: "Guter Kompromiss aus Komfort und Optik.", to: "/modelle#mittel" },
+  { title: "Hohe & begehbare Modelle", text: "Maximaler Komfort, ganzjährig nutzbar.", to: "/modelle#hoch" },
 ];
 
-const galleryImages = [
-  { src: modelSchiebe, alt: "Schiebe-Poolüberdachung geöffnet" },
-  { src: modelBegehbar, alt: "Begehbare Poolüberdachung mit Aluminiumprofilen" },
-  { src: modelFlach, alt: "Elegante flache Poolüberdachung" },
-  { src: modelMittel, alt: "Mittelhohe Poolüberdachung im Garten" },
+const manufacturers = [
+  { name: "Paradiso", origin: "Made in Germany", note: "Schienenlose Konstruktion, individuelle Fertigung.", img: mfgParadiso.url, url: "https://www.paradiso.tv/" },
+  { name: "Alukov", origin: "CZ, dt. Vertretung", note: "Sehr breites Modellsortiment für alle Bauhöhen.", img: mfgAlukov.url, url: "https://www.alukov.de/" },
+  { name: "Aluna", origin: "Europa / Deutschland", note: "Low, Medium & High Line mit klaren Linien.", img: mfgAluna.url, url: "https://www.aluna-deutschland.de/" },
+  { name: "OBRU", origin: "Made in Germany", note: "Manufaktur-Qualität, 100 % Maßanfertigung.", img: mfgObru.url, url: "https://www.obru.de/poolueberdachungen/" },
 ];
 
 function Home() {
