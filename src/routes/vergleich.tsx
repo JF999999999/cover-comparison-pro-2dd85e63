@@ -57,7 +57,7 @@ export const Route = createFileRoute("/vergleich")({
 type Verdict = "glass" | "plastic" | "neutral";
 
 type Criterion = {
-  icon: React.ComponentType<{ className?: string }>;
+  icon: ComponentType<{ className?: string }>;
   label: string;
   tooltip: string;
   glass: string;
