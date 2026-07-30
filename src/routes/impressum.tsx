@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
+import { SITE_URL } from "@/lib/site";
 
-const TITLE = "Impressum – Poolüberdachung Vergleich";
-const DESCRIPTION = "Impressum und rechtliche Angaben von Poolüberdachung Vergleich.";
+const TITLE = "Impressum – Poolüberdachung Ratgeber";
+const DESCRIPTION = "Angaben gemäß § 5 DDG und Verantwortlichkeit für den Inhalt dieser Website.";
 
 export const Route = createFileRoute("/impressum")({
   head: () => ({
@@ -10,9 +11,11 @@ export const Route = createFileRoute("/impressum")({
       { title: TITLE },
       { name: "description", content: DESCRIPTION },
       { name: "robots", content: "noindex,follow" },
-      { property: "og:url", content: "/impressum" },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
+      { property: "og:url", content: `${SITE_URL}/impressum` },
     ],
-    links: [{ rel: "canonical", href: "/impressum" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/impressum` }],
   }),
   component: Impressum,
 });
@@ -23,30 +26,97 @@ function Impressum() {
       <PageHero eyebrow="Rechtliches" title="Impressum" />
       <section className="container-x mt-12">
         <div className="mx-auto max-w-3xl space-y-6 text-muted-foreground">
-          <p>
-            Die vollständigen Angaben nach § 5 TMG werden vom Betreiber dieser Seite ergänzt.
-            Bitte tragen Sie hier Firmenname, Anschrift, vertretungsberechtigte Person,
-            Kontaktdaten sowie ggf. Handelsregister- und Umsatzsteuer-ID ein.
-          </p>
-          <div className="rounded-2xl border border-border bg-mist p-6">
-            <p className="text-sm">
-              <strong>Hinweis:</strong> Dieser Platzhalter ersetzt keine rechtsverbindliche
-              Impressumsangabe. Vor Livegang bitte durch die tatsächlichen Angaben des
-              Betreibers ersetzen.
+          <div>
+            <h2 className="text-2xl text-foreground">Angaben gemäß § 5 DDG</h2>
+            <p className="mt-3">
+              Carsten Fels
+              <br />
+              77743 Neuried
+              <br />
+              Deutschland
             </p>
           </div>
-          <h2 className="text-2xl text-foreground">Haftungsausschluss</h2>
-          <p>
-            Die Inhalte dieser Website wurden mit größter Sorgfalt erstellt. Für Richtigkeit,
-            Vollständigkeit und Aktualität der Inhalte kann keine Gewähr übernommen werden.
-            Vergleichsangaben basieren auf öffentlich verfügbaren Informationen zum Zeitpunkt
-            der Veröffentlichung.
-          </p>
-          <h2 className="text-2xl text-foreground">Transparenzhinweis</h2>
-          <p>
-            Diese Website wird in Zusammenarbeit mit Paradiso betrieben. Links zur offiziellen
-            Paradiso Website sind als solche gekennzeichnet.
-          </p>
+
+          <div>
+            <h2 className="text-2xl text-foreground">Kontakt</h2>
+            <p className="mt-3">
+              Kontaktaufnahme bitte über die auf der{" "}
+              <a href="/kontakt" className="text-primary underline-offset-4 hover:underline">
+                Kontaktseite
+              </a>{" "}
+              genannten Wege. Telefonnummer und E-Mail-Adresse werden vom Betreiber ergänzt.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-2xl text-foreground">
+              Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
+            </h2>
+            <p className="mt-3">
+              Carsten Fels, 77743 Neuried, Deutschland
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-2xl text-foreground">Hosting</h2>
+            <p className="mt-3">
+              Diese Website wird über die Plattform Lovable (Lovable Labs Incorporated) gehostet.
+              Beim Aufruf der Website werden technisch notwendige Server-Logdaten verarbeitet.
+              Näheres dazu finden Sie in der{" "}
+              <a href="/datenschutz" className="text-primary underline-offset-4 hover:underline">
+                Datenschutzerklärung
+              </a>
+              .
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-2xl text-foreground">Haftung für Inhalte</h2>
+            <p className="mt-3">
+              Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen
+              Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG sind wir
+              als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde
+              Informationen zu überwachen oder nach Umständen zu forschen, die auf eine
+              rechtswidrige Tätigkeit hinweisen. Die Inhalte dieser Website wurden mit größter
+              Sorgfalt erstellt; für Richtigkeit, Vollständigkeit und Aktualität kann jedoch keine
+              Gewähr übernommen werden.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-2xl text-foreground">Haftung für Links</h2>
+            <p className="mt-3">
+              Diese Website enthält Links zu externen Websites Dritter, auf deren Inhalte wir
+              keinen Einfluss haben. Für die Inhalte der verlinkten Seiten ist stets der jeweilige
+              Anbieter oder Betreiber verantwortlich. Bei Bekanntwerden von Rechtsverletzungen
+              entfernen wir derartige Links umgehend.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-2xl text-foreground">Urheberrecht</h2>
+            <p className="mt-3">
+              Die durch den Seitenbetreiber erstellten Inhalte und Werke unterliegen dem deutschen
+              Urheberrecht. Das verwendete Bildmaterial stammt von Paradiso und wird mit
+              Genehmigung verwendet; eine weitere Nutzung ist nicht gestattet.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-2xl text-foreground">Verbraucherstreitbeilegung</h2>
+            <p className="mt-3">
+              Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer
+              Verbraucherschlichtungsstelle teilzunehmen.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-2xl text-foreground">Kooperationshinweis</h2>
+            <p className="mt-3">
+              Diese Website entsteht in Zusammenarbeit mit Paradiso. Links zur Paradiso Website
+              sind als solche erkennbar.
+            </p>
+          </div>
         </div>
       </section>
     </>
