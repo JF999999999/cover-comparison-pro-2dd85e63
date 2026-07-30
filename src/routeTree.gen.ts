@@ -13,6 +13,7 @@ import { Route as VorteileRouteImport } from './routes/vorteile'
 import { Route as VergleichRouteImport } from './routes/vergleich'
 import { Route as UeberUnsRouteImport } from './routes/ueber-uns'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SchienenlosePoolueberdachungenRouteImport } from './routes/schienenlose-poolueberdachungen'
 import { Route as RatgeberRouteImport } from './routes/ratgeber'
 import { Route as ModelleRouteImport } from './routes/modelle'
 import { Route as KontaktRouteImport } from './routes/kontakt'
@@ -41,6 +42,12 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SchienenlosePoolueberdachungenRoute =
+  SchienenlosePoolueberdachungenRouteImport.update({
+    id: '/schienenlose-poolueberdachungen',
+    path: '/schienenlose-poolueberdachungen',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const RatgeberRoute = RatgeberRouteImport.update({
   id: '/ratgeber',
   path: '/ratgeber',
@@ -85,6 +92,7 @@ export interface FileRoutesByFullPath {
   '/kontakt': typeof KontaktRoute
   '/modelle': typeof ModelleRoute
   '/ratgeber': typeof RatgeberRoute
+  '/schienenlose-poolueberdachungen': typeof SchienenlosePoolueberdachungenRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/ueber-uns': typeof UeberUnsRoute
   '/vergleich': typeof VergleichRoute
@@ -98,6 +106,7 @@ export interface FileRoutesByTo {
   '/kontakt': typeof KontaktRoute
   '/modelle': typeof ModelleRoute
   '/ratgeber': typeof RatgeberRoute
+  '/schienenlose-poolueberdachungen': typeof SchienenlosePoolueberdachungenRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/ueber-uns': typeof UeberUnsRoute
   '/vergleich': typeof VergleichRoute
@@ -112,6 +121,7 @@ export interface FileRoutesById {
   '/kontakt': typeof KontaktRoute
   '/modelle': typeof ModelleRoute
   '/ratgeber': typeof RatgeberRoute
+  '/schienenlose-poolueberdachungen': typeof SchienenlosePoolueberdachungenRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/ueber-uns': typeof UeberUnsRoute
   '/vergleich': typeof VergleichRoute
@@ -127,6 +137,7 @@ export interface FileRouteTypes {
     | '/kontakt'
     | '/modelle'
     | '/ratgeber'
+    | '/schienenlose-poolueberdachungen'
     | '/sitemap.xml'
     | '/ueber-uns'
     | '/vergleich'
@@ -140,6 +151,7 @@ export interface FileRouteTypes {
     | '/kontakt'
     | '/modelle'
     | '/ratgeber'
+    | '/schienenlose-poolueberdachungen'
     | '/sitemap.xml'
     | '/ueber-uns'
     | '/vergleich'
@@ -153,6 +165,7 @@ export interface FileRouteTypes {
     | '/kontakt'
     | '/modelle'
     | '/ratgeber'
+    | '/schienenlose-poolueberdachungen'
     | '/sitemap.xml'
     | '/ueber-uns'
     | '/vergleich'
@@ -167,6 +180,7 @@ export interface RootRouteChildren {
   KontaktRoute: typeof KontaktRoute
   ModelleRoute: typeof ModelleRoute
   RatgeberRoute: typeof RatgeberRoute
+  SchienenlosePoolueberdachungenRoute: typeof SchienenlosePoolueberdachungenRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   UeberUnsRoute: typeof UeberUnsRoute
   VergleichRoute: typeof VergleichRoute
@@ -201,6 +215,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/schienenlose-poolueberdachungen': {
+      id: '/schienenlose-poolueberdachungen'
+      path: '/schienenlose-poolueberdachungen'
+      fullPath: '/schienenlose-poolueberdachungen'
+      preLoaderRoute: typeof SchienenlosePoolueberdachungenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ratgeber': {
@@ -263,6 +284,7 @@ const rootRouteChildren: RootRouteChildren = {
   KontaktRoute: KontaktRoute,
   ModelleRoute: ModelleRoute,
   RatgeberRoute: RatgeberRoute,
+  SchienenlosePoolueberdachungenRoute: SchienenlosePoolueberdachungenRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   UeberUnsRoute: UeberUnsRoute,
   VergleichRoute: VergleichRoute,

@@ -1,16 +1,112 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Check, X } from "lucide-react";
-import heroFlach from "@/assets/model-flach.jpg";
-import heroMittel from "@/assets/model-mittel.jpg";
-import heroHoch from "@/assets/model-hoch.jpg";
-import heroBegehbar from "@/assets/model-begehbar.jpg";
-import heroSchiebe from "@/assets/model-schiebe.jpg";
+import { Check, Minus } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
-import { CTASection } from "@/components/site/CTA";
+import { Breadcrumbs, breadcrumbJsonLd } from "@/components/site/Breadcrumbs";
+import { ParadisoFazit } from "@/components/site/ParadisoFazit";
+import { IMAGES, absoluteImageUrl, type SiteImage } from "@/lib/images";
+import { SITE_URL } from "@/lib/site";
 
-const TITLE = "Modelle von Poolüberdachungen – Flach, Hoch, Schiebe & mehr";
+const TITLE = "Modelle von Poolüberdachungen – Bauformen im Überblick";
 const DESCRIPTION =
-  "Übersicht aller Bauarten von Poolüberdachungen: flach, mittelhoch, hoch, begehbar und Schiebeüberdachungen inklusive Vor- und Nachteilen.";
+  "Flache, mittelhohe, hohe, begehbare und schiebbare Poolüberdachungen: Aufbau, Einsatzbereiche, Vorteile und Grenzen der wichtigsten Bauformen.";
+
+const crumbs = [
+  { label: "Startseite", to: "/" },
+  { label: "Modelle" },
+];
+
+type Modell = {
+  id: string;
+  name: string;
+  image: SiteImage;
+  intro: string;
+  pro: string[];
+  contra: string[];
+};
+
+const modelle: Modell[] = [
+  {
+    id: "flach",
+    name: "Flache Poolüberdachung",
+    image: IMAGES.flach,
+    intro:
+      "Die flache Bauform liegt niedrig über der Wasseroberfläche und fügt sich optisch sehr zurückhaltend in den Garten ein. Sie eignet sich besonders dort, wo die Sicht auf Haus und Grundstück frei bleiben soll.",
+    pro: [
+      "Sehr unauffällige Optik, geringe Bauhöhe",
+      "Häufig ohne Baugenehmigung realisierbar",
+      "Guter Wärmerückhalt durch kleines Luftvolumen",
+      "Windschnittige Konstruktion",
+    ],
+    contra: [
+      "Schwimmen nur bei geöffneter Überdachung",
+      "Kein Aufenthaltsbereich rund um den Pool",
+    ],
+  },
+  {
+    id: "mittelhoch",
+    name: "Mittelhohe Poolüberdachung",
+    image: IMAGES.mittelhoch,
+    intro:
+      "Mittelhohe Modelle sind ein Kompromiss aus zurückhaltender Optik und nutzbarem Innenraum. Schwimmen ist bei vielen Ausführungen auch im geschlossenen Zustand möglich.",
+    pro: [
+      "Schwimmen meist auch geschlossen möglich",
+      "Deutlich mehr Innenraum als bei Flachmodellen",
+      "Weiterhin moderate Bauhöhe",
+    ],
+    contra: [
+      "Aufrechtes Stehen nur eingeschränkt möglich",
+      "Größere Ansichtsfläche im Garten",
+    ],
+  },
+  {
+    id: "hoch",
+    name: "Hohe Poolüberdachung",
+    image: IMAGES.hoch,
+    intro:
+      "Hohe Überdachungen schaffen einen eigenen Raum: Sie sind begehbar, bieten Platz für Liegen und Möbel und machen den Pool zu einem wettergeschützten Aufenthaltsbereich.",
+    pro: [
+      "Voll begehbarer Innenraum, aufrechtes Stehen möglich",
+      "Nutzung als geschützter Wohn- und Aufenthaltsbereich",
+      "Sehr lange nutzbare Saison",
+    ],
+    contra: [
+      "Häufig genehmigungspflichtig",
+      "Prägt das Gartenbild deutlich stärker",
+    ],
+  },
+  {
+    id: "begehbar",
+    name: "Begehbare Poolüberdachung",
+    image: IMAGES.begehbar,
+    intro:
+      "Bei begehbaren Konstruktionen ist die Dachfläche belastbar ausgeführt und lässt sich als zusätzliche Terrassenfläche nutzen – interessant bei knappem Platz im Garten.",
+    pro: [
+      "Zusätzliche nutzbare Fläche über dem Pool",
+      "Sehr hohe Verkehrssicherheit im geschlossenen Zustand",
+      "Klare, architektonische Optik",
+    ],
+    contra: [
+      "Höhere Anforderungen an Statik und Unterbau",
+      "Sorgfältige Planung der Auflager erforderlich",
+    ],
+  },
+  {
+    id: "schiebe",
+    name: "Schiebeüberdachung",
+    image: IMAGES.pflege,
+    intro:
+      "Schiebemodelle bestehen aus mehreren ineinander verfahrbaren Segmenten. So lässt sich der Pool je nach Wetter teilweise oder vollständig öffnen.",
+    pro: [
+      "Stufenlose Anpassung an Wetter und Nutzung",
+      "Segmente lassen sich platzsparend zusammenschieben",
+      "Auch motorisch bedienbar erhältlich",
+    ],
+    contra: [
+      "Ausreichend Schiebeweg neben dem Pool erforderlich",
+      "Führungen benötigen regelmäßige Reinigung",
+    ],
+  },
+];
 
 export const Route = createFileRoute("/modelle")({
   head: () => ({
@@ -19,210 +115,101 @@ export const Route = createFileRoute("/modelle")({
       { name: "description", content: DESCRIPTION },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
-      { property: "og:url", content: "/modelle" },
+      { property: "og:type", content: "article" },
+      { property: "og:url", content: `${SITE_URL}/modelle` },
+      { property: "og:image", content: absoluteImageUrl(IMAGES.mittelhoch) },
+      { name: "twitter:image", content: absoluteImageUrl(IMAGES.mittelhoch) },
     ],
-    links: [{ rel: "canonical", href: "/modelle" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/modelle` }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify([
+          breadcrumbJsonLd(crumbs),
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: TITLE,
+            description: DESCRIPTION,
+            inLanguage: "de-DE",
+            image: absoluteImageUrl(IMAGES.mittelhoch),
+            author: { "@type": "Person", name: "Carsten Fels" },
+          },
+        ]),
+      },
+    ],
   }),
   component: Modelle,
 });
 
-type Model = {
-  id: string;
-  name: string;
-  image?: string;
-  claim: string;
-  description: string;
-  pros: string[];
-  cons: string[];
-  recommendation: string;
-};
-
-const models: Model[] = [
-  {
-    id: "flach",
-    name: "Flache Poolüberdachungen",
-    image: heroFlach,
-    claim: "Diskret, modern, ideal für zeitgemäße Gärten.",
-    description:
-      "Flache Modelle liegen mit geringer Bauhöhe direkt über dem Pool. Sie fügen sich unauffällig in die Architektur ein und schützen zuverlässig vor Verschmutzung und Wärmeverlust.",
-    pros: [
-      "Sehr diskrete Optik",
-      "Guter Wärmerückhalt bei geringem Luftvolumen",
-      "Meist günstiger als hohe Varianten",
-      "Häufig auch nachträglich installierbar",
-    ],
-    cons: [
-      "Keine Nutzung als Wintergarten möglich",
-      "Kein Schwimmen bei geschlossener Überdachung",
-    ],
-    recommendation:
-      "Ideal für Puristen und moderne Gärten, in denen die Überdachung optisch zurücktreten soll.",
-  },
-  {
-    id: "mittel",
-    name: "Mittelhohe Poolüberdachungen",
-    image: heroMittel,
-    claim: "Der ausgewogene Kompromiss.",
-    description:
-      "Mittelhohe Modelle bieten mehr Kopffreiheit und ermöglichen es, bei geöffneten Frontelementen entspannt einzusteigen. Sie kombinieren Wärmeeffizienz mit Komfort.",
-    pros: [
-      "Deutlich mehr Komfort als flache Modelle",
-      "Guter Wärmerückhalt",
-      "Optisch weiterhin sehr integrierbar",
-    ],
-    cons: [
-      "Höherer Preis als flache Varianten",
-      "Nur eingeschränkt begehbar",
-    ],
-    recommendation:
-      "Für Familien, die etwas mehr Komfort möchten, ohne auf ein zurückhaltendes Design zu verzichten.",
-  },
-  {
-    id: "hoch",
-    name: "Hohe Poolüberdachungen",
-    image: heroHoch,
-    claim: "Voller Komfort, ganzjährig nutzbar.",
-    description:
-      "Hohe Überdachungen wirken wie ein kleiner Wintergarten und ermöglichen komfortables Schwimmen und Verweilen auch bei geschlossenem Dach. Ideal für ganzjährige Nutzung.",
-    pros: [
-      "Schwimmen bei geschlossener Überdachung möglich",
-      "Nutzung als Lounge- oder Wellnessbereich",
-      "Sehr guter Wetterschutz",
-    ],
-    cons: [
-      "Höherer Anschaffungspreis",
-      "Deutlich präsenter im Garten",
-      "Ggf. Baugenehmigung erforderlich",
-    ],
-    recommendation:
-      "Perfekt für alle, die ihren Pool wie ein privates Hallenbad das ganze Jahr über nutzen möchten.",
-  },
-  {
-    id: "begehbar",
-    name: "Begehbare Modelle",
-    image: heroBegehbar,
-    claim: "Komfort und Bewegungsfreiheit.",
-    description:
-      "Begehbare Überdachungen bieten ausreichend Kopffreiheit, um bequem um den Pool herumzugehen. Sie eignen sich hervorragend für Familien und Poolbetreiber, die viel Zeit am Wasser verbringen.",
-    pros: [
-      "Bewegungsfreiheit rund um den Pool",
-      "Erweiterte Nutzung als geschützter Aufenthaltsbereich",
-      "Sicherer Zugang bei jedem Wetter",
-    ],
-    cons: [
-      "Mittleres bis höheres Preissegment",
-      "Größerer Flächenbedarf",
-    ],
-    recommendation:
-      "Empfehlenswert, wenn der Pool als zentraler Aufenthaltsort im Garten dienen soll.",
-  },
-  {
-    id: "schiebe",
-    name: "Schiebeüberdachungen",
-    image: heroSchiebe,
-    claim: "Flexibel öffnen und schließen.",
-    description:
-      "Schiebeüberdachungen bestehen aus mehreren, ineinander schiebbaren Segmenten. So lässt sich der Pool je nach Wetter und Wunsch teilweise oder vollständig öffnen.",
-    pros: [
-      "Sehr flexibel im Alltag",
-      "Kombinierbar mit flachen, mittleren und hohen Ausführungen",
-      "Angenehmes Freibad-Feeling bei geöffnetem Zustand",
-    ],
-    cons: [
-      "Regelmäßige Reinigung der Schienen empfohlen",
-      "Höhere technische Komplexität",
-    ],
-    recommendation:
-      "Die richtige Wahl, wenn maximale Flexibilität wichtig ist – vom vollen Schutz bis zum offenen Freibad.",
-  },
-];
-
 function Modelle() {
   return (
     <>
+      <Breadcrumbs items={crumbs} />
       <PageHero
-        eyebrow="Modelle"
-        title="Welche Poolüberdachung passt zu Ihrem Garten?"
-        subtitle="Fünf Bauarten – von diskret-flach bis begehbar. Jede hat ihre Stärken. Hier finden Sie eine übersichtliche Gegenüberstellung."
+        eyebrow="Bauformen"
+        title="Modelle von Poolüberdachungen im Überblick"
+        subtitle="Flach, mittelhoch, hoch, begehbar oder schiebbar – welche Bauform passt, hängt von Grundstück, Nutzung und gewünschtem Komfort ab."
       />
 
-      <section className="container-x mt-10 grid gap-4 md:grid-cols-5">
-        {models.map((m) => (
-          <a
+      <div className="container-x mt-16 space-y-20 md:space-y-28">
+        {modelle.map((m, i) => (
+          <article
             key={m.id}
-            href={`#${m.id}`}
-            className="rounded-xl border border-border bg-white px-4 py-3 text-center text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
+            id={m.id}
+            className="grid items-center gap-10 md:grid-cols-2 md:gap-16"
           >
-            {m.name.replace("Poolüberdachungen", "").replace("Modelle", "").trim() || m.name}
-          </a>
-        ))}
-      </section>
+            <figure
+              className={`overflow-hidden rounded-3xl border border-border bg-mist shadow-[var(--shadow-soft)] ${
+                i % 2 === 1 ? "md:order-2" : ""
+              }`}
+            >
+              <img
+                src={m.image.src}
+                alt={m.image.alt}
+                title={m.image.title}
+                width={m.image.width}
+                height={m.image.height}
+                loading="lazy"
+                decoding="async"
+                className="aspect-[4/3] w-full object-cover"
+              />
+            </figure>
 
-      <div className="mt-16 space-y-24">
-        {models.map((m, i) => (
-          <section key={m.id} id={m.id} className="container-x scroll-mt-24">
-            <div className="grid gap-10 md:grid-cols-2 md:items-center">
-              <div className={i % 2 === 1 ? "md:order-2" : ""}>
-                {m.image ? (
-                  <img
-                    src={m.image}
-                    alt={m.name}
-                    width={1200}
-                    height={800}
-                    loading="lazy"
-                    className="aspect-[4/3] w-full rounded-2xl object-cover shadow-[var(--shadow-elegant)]"
-                  />
-                ) : (
-                  <div className="aspect-[4/3] w-full rounded-2xl hero-gradient shadow-[var(--shadow-elegant)]" />
-                )}
-              </div>
-              <div className={i % 2 === 1 ? "md:order-1" : ""}>
-                <span className="text-xs font-medium uppercase tracking-widest text-accent">
-                  Modelltyp {i + 1} / {models.length}
-                </span>
-                <h2 className="mt-3 text-3xl md:text-4xl">{m.name}</h2>
-                <p className="mt-2 text-lg font-medium text-primary">{m.claim}</p>
-                <p className="mt-4 text-muted-foreground">{m.description}</p>
+            <div>
+              <h2 className="text-3xl md:text-4xl">{m.name}</h2>
+              <p className="mt-4 text-muted-foreground md:text-lg">{m.intro}</p>
 
-                <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                  <div className="rounded-xl border border-border bg-white p-5">
-                    <div className="mb-2 text-sm font-semibold text-foreground">Vorteile</div>
-                    <ul className="space-y-1.5 text-sm text-muted-foreground">
-                      {m.pros.map((p) => (
-                        <li key={p} className="flex gap-2">
-                          <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-                          <span>{p}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="rounded-xl border border-border bg-white p-5">
-                    <div className="mb-2 text-sm font-semibold text-foreground">Zu beachten</div>
-                    <ul className="space-y-1.5 text-sm text-muted-foreground">
-                      {m.cons.map((c) => (
-                        <li key={c} className="flex gap-2">
-                          <X className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground/70" />
-                          <span>{c}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+              <div className="mt-8 grid gap-6 sm:grid-cols-2">
+                <div className="rounded-2xl border border-border bg-white p-5">
+                  <h3 className="text-sm font-semibold text-foreground">Stärken</h3>
+                  <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+                    {m.pro.map((p) => (
+                      <li key={p} className="flex gap-2">
+                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                        <span>{p}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-
-                <div className="mt-6 rounded-xl border border-primary/10 bg-primary/5 p-5 text-sm text-foreground">
-                  <span className="font-semibold text-primary">Empfehlung: </span>
-                  {m.recommendation}
+                <div className="rounded-2xl border border-border bg-mist p-5">
+                  <h3 className="text-sm font-semibold text-foreground">Zu bedenken</h3>
+                  <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+                    {m.contra.map((c) => (
+                      <li key={c} className="flex gap-2">
+                        <Minus className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
+                        <span>{c}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>
-          </section>
+          </article>
         ))}
       </div>
 
-      <CTASection
-        title="Unsicher, welches Modell passt?"
-        subtitle="Paradiso hilft Ihnen bei der Wahl der passenden Bauform – kostenfrei und unverbindlich."
-      />
+      <ParadisoFazit text="Die passende Bauform ergibt sich aus Grundstück, Nutzung und gewünschtem Komfort. Unabhängig davon entscheiden Verarbeitungsqualität, Bedienkomfort und Serviceverfügbarkeit darüber, wie lange eine Überdachung Freude macht." />
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X, Award, ExternalLink } from "lucide-react";
-import { NAV_LINKS, PARADISO_URL, PARADISO_REFERENZEN_URL, SITE_NAME } from "@/lib/site";
+import { Menu, X } from "lucide-react";
+import { NAV_LINKS, SITE_NAME } from "@/lib/site";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -20,21 +20,6 @@ export function Header() {
         scrolled ? "glass border-b border-border/60" : "bg-transparent"
       }`}
     >
-      <a
-        href={PARADISO_REFERENZEN_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group block bg-primary text-primary-foreground"
-      >
-        <div className="container-x flex h-10 items-center justify-center gap-2 text-xs sm:text-sm">
-          <Award className="h-4 w-4 shrink-0 text-accent" />
-          <span className="truncate">
-            <span className="font-medium">Beispielprojekte ansehen</span>
-            <span className="hidden sm:inline text-primary-foreground/70"> — Paradiso Referenzanlagen &amp; EUSA-Award-Gewinner</span>
-          </span>
-          <ExternalLink className="h-3.5 w-3.5 shrink-0 opacity-70 transition-transform group-hover:translate-x-0.5" />
-        </div>
-      </a>
       <div className="container-x flex h-16 items-center justify-between gap-4 md:h-20">
         <Link to="/" className="group flex min-w-0 items-center gap-2.5">
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary text-primary-foreground">
@@ -45,18 +30,18 @@ export function Header() {
               {SITE_NAME}
             </span>
             <span className="hidden text-[11px] uppercase tracking-widest text-muted-foreground sm:block">
-              Unabhängig · Transparent
+              Informationsportal
             </span>
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav aria-label="Hauptnavigation" className="hidden items-center gap-0.5 xl:flex">
           {NAV_LINKS.map((l) => (
             <Link
               key={l.to}
               to={l.to}
               activeOptions={{ exact: l.to === "/" }}
-              className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="rounded-md px-2.5 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
               activeProps={{ className: "text-foreground" }}
             >
               {l.label}
@@ -64,29 +49,20 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
-          <a
-            href={PARADISO_URL}
-            target="_blank"
-            rel="noopener noreferrer sponsored"
-            className="hidden rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-[var(--shadow-soft)] transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-elegant)] md:inline-flex"
-          >
-            Zu Paradiso
-          </a>
-          <button
-            type="button"
-            aria-label="Menü"
-            className="grid h-10 w-10 place-items-center rounded-md border border-border text-foreground lg:hidden"
-            onClick={() => setOpen((v) => !v)}
-          >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-        </div>
+        <button
+          type="button"
+          aria-label={open ? "Menü schließen" : "Menü öffnen"}
+          aria-expanded={open}
+          className="grid h-10 w-10 place-items-center rounded-md border border-border text-foreground xl:hidden"
+          onClick={() => setOpen((v) => !v)}
+        >
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
       </div>
 
       {open && (
-        <div className="border-t border-border bg-background/95 backdrop-blur lg:hidden">
-          <nav className="container-x flex flex-col py-3">
+        <div className="border-t border-border bg-background/95 backdrop-blur xl:hidden">
+          <nav aria-label="Mobile Navigation" className="container-x flex flex-col py-3">
             {NAV_LINKS.map((l) => (
               <Link
                 key={l.to}
@@ -97,14 +73,6 @@ export function Header() {
                 {l.label}
               </Link>
             ))}
-            <a
-              href={PARADISO_URL}
-              target="_blank"
-              rel="noopener noreferrer sponsored"
-              className="mt-2 rounded-full bg-primary px-4 py-3 text-center text-sm font-medium text-primary-foreground"
-            >
-              Zur Paradiso Website
-            </a>
           </nav>
         </div>
       )}

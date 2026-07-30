@@ -1,14 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ExternalLink, ShieldCheck, Sparkles, Sun, Droplets, Lock, TrendingUp } from "lucide-react";
-import heroPool from "@/assets/hero-pool.jpg";
-import mfgParadiso from "@/assets/mfg-paradiso.jpg.asset.json";
-import mfgAlukov from "@/assets/mfg-alukov.webp.asset.json";
-import mfgAluna from "@/assets/mfg-aluna.jpg.asset.json";
-import mfgObru from "@/assets/mfg-obru.jpg.asset.json";
+import { ArrowRight, Sun, Droplets, Lock, Leaf, Wrench, Ruler } from "lucide-react";
+import { IMAGES, absoluteImageUrl } from "@/lib/images";
+import { ParadisoFazit } from "@/components/site/ParadisoFazit";
+import { SITE_URL } from "@/lib/site";
 
-const TITLE = "Die besten Poolüberdachungen im Vergleich | Unabhängiger Ratgeber";
+const TITLE = "Poolüberdachungen – Modelle, Technik und Ratgeber";
 const DESCRIPTION =
-  "Poolüberdachungen im großen Vergleich: Materialien, Qualität, Ausstattung und Preis-Leistung. Modellübersicht, Kaufratgeber und Empfehlungen.";
+  "Informationsportal zu Poolüberdachungen: Bauformen, Materialien, Sicherheit, Wärmeschutz, Pflege, Wartung und Ersatzteilversorgung – verständlich erklärt.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -17,225 +15,209 @@ export const Route = createFileRoute("/")({
       { name: "description", content: DESCRIPTION },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
-      { property: "og:url", content: "/" },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE_URL}/` },
+      { property: "og:image", content: absoluteImageUrl(IMAGES.hero) },
+      { name: "twitter:image", content: absoluteImageUrl(IMAGES.hero) },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ImageObject",
+          contentUrl: absoluteImageUrl(IMAGES.hero),
+          caption: IMAGES.hero.alt,
+          width: IMAGES.hero.width,
+          height: IMAGES.hero.height,
+        }),
+      },
+    ],
   }),
   component: Home,
 });
 
 const benefits = [
-  { icon: Sun, title: "Längere Badesaison", text: "Bis zu 3 Monate mehr Badevergnügen pro Jahr durch spürbar wärmeres Wasser." },
-  { icon: Droplets, title: "Sauberes Wasser", text: "Weniger Laub, Schmutz und Verdunstung – geringerer Reinigungsaufwand." },
-  { icon: Lock, title: "Mehr Sicherheit", text: "Zusätzlicher Schutz für Kinder und Haustiere bei geschlossener Überdachung." },
-  { icon: TrendingUp, title: "Werterhalt", text: "Ein gepflegter Pool steigert die Attraktivität und den Wert Ihres Gartens." },
+  { icon: Sun, title: "Längere Badesaison", text: "Wärmerückhalt und Treibhauseffekt sorgen für früher nutzbares und länger warmes Wasser." },
+  { icon: Droplets, title: "Sauberes Wasser", text: "Laub, Pollen und Staub bleiben draußen – das senkt Reinigungsaufwand und Wasserverdunstung." },
+  { icon: Lock, title: "Mehr Sicherheit", text: "Eine verschlossene Überdachung erschwert den unbeaufsichtigten Zugang zum Wasser." },
+  { icon: Leaf, title: "Energie sparen", text: "Weniger Wärmeverlust bedeutet geringeren Heizbedarf über die gesamte Saison." },
 ];
 
-const modelPreviews = [
-  { title: "Flache Modelle", text: "Diskret, elegant, ideal für moderne Gärten.", to: "/modelle#flach" },
-  { title: "Mittelhohe Modelle", text: "Guter Kompromiss aus Komfort und Optik.", to: "/modelle#mittel" },
-  { title: "Hohe & begehbare Modelle", text: "Maximaler Komfort, ganzjährig nutzbar.", to: "/modelle#hoch" },
-];
-
-const manufacturers = [
-  { name: "Paradiso", origin: "Made in Germany", note: "Schienenlose Konstruktion, individuelle Fertigung.", img: mfgParadiso.url, url: "https://www.paradiso.tv/" },
-  { name: "Alukov", origin: "CZ, dt. Vertretung", note: "Sehr breites Modellsortiment für alle Bauhöhen.", img: mfgAlukov.url, url: "https://www.alukov.de/" },
-  { name: "Aluna", origin: "Europa / Deutschland", note: "Low, Medium & High Line mit klaren Linien.", img: mfgAluna.url, url: "https://www.aluna-deutschland.de/" },
-  { name: "OBRU", origin: "Made in Germany", note: "Manufaktur-Qualität, 100 % Maßanfertigung.", img: mfgObru.url, url: "https://www.obru.de/poolueberdachungen/" },
+const topics = [
+  {
+    icon: Ruler,
+    title: "Bauformen verstehen",
+    text: "Flach, mittelhoch, hoch, begehbar oder schiebbar – jede Bauform hat eigene Stärken.",
+    to: "/modelle",
+    cta: "Bauformen ansehen",
+  },
+  {
+    icon: Sun,
+    title: "Schienenlose Systeme",
+    text: "Ohne Bodenschienen bleibt der Poolrand frei begehbar und leichter zu reinigen.",
+    to: "/schienenlose-poolueberdachungen",
+    cta: "Technik kennenlernen",
+  },
+  {
+    icon: Wrench,
+    title: "Pflege, Wartung, Ersatzteile",
+    text: "Wie sich Überdachungen dauerhaft in Funktion halten lassen – und was das mit Qualität zu tun hat.",
+    to: "/pflege-wartung",
+    cta: "Zur Pflegeanleitung",
+  },
 ];
 
 function Home() {
   return (
     <>
-      {/* HERO */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 -z-10">
           <img
-            src={heroPool}
-            alt="Moderne flache Poolüberdachung aus Aluminium und Polycarbonat über einem Pool bei Sonnenuntergang"
-            width={1920}
-            height={1200}
+            src={IMAGES.hero.src}
+            alt={IMAGES.hero.alt}
+            title={IMAGES.hero.title}
+            width={IMAGES.hero.width}
+            height={IMAGES.hero.height}
+            fetchPriority="high"
+            decoding="async"
             className="h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/40 to-black/70" />
         </div>
 
-        <div className="container-x flex min-h-[86vh] flex-col justify-end pb-16 pt-32 text-white md:min-h-[92vh] md:pb-24">
-          <span className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs uppercase tracking-widest text-white/90 backdrop-blur fade-up">
-            <Sparkles className="h-3.5 w-3.5" /> Unabhängiger Vergleich · Hersteller im Überblick
-          </span>
-          <h1 className="max-w-4xl text-balance text-4xl leading-[1.02] md:text-7xl fade-up">
-            Die besten Poolüberdachungen im Vergleich
+        <div className="container-x flex min-h-[80vh] flex-col justify-end pb-16 pt-32 text-white md:min-h-[88vh] md:pb-24">
+          <h1 className="max-w-4xl text-balance text-4xl leading-[1.04] md:text-7xl fade-up">
+            Poolüberdachungen – Modelle, Technik und Ratgeber
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-white/85 md:text-xl fade-up">
-            Vergleichen Sie Materialien, Qualität, Ausstattung und Preis-Leistung verschiedener
-            Anbieter – transparent, sachlich und mit Blick auf das, was wirklich zählt.
+            Eine Poolüberdachung schützt den Pool vor Verschmutzung, reduziert Wärmeverluste und
+            verlängert die Badesaison. Diese Website informiert unabhängig über Bauformen,
+            Materialien, Sicherheit, Pflege, Wartung, Ersatzteilversorgung und moderne
+            Poolüberdachungen.
           </p>
           <div className="mt-9 flex flex-wrap gap-3 fade-up">
             <Link
-              to="/vergleich"
+              to="/modelle"
               className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-primary shadow-[var(--shadow-elegant)] transition-all hover:-translate-y-0.5"
             >
-              Jetzt vergleichen
+              Modelle entdecken
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
-              to="/modelle"
+              to="/ratgeber"
               className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur transition-colors hover:bg-white/15"
             >
-              Modelle entdecken
+              Zum Ratgeber
             </Link>
-          </div>
-
-          {/* Trust strip */}
-          <div className="mt-14 grid grid-cols-2 gap-4 border-t border-white/15 pt-6 text-white/85 md:grid-cols-4 md:gap-8">
-            {[
-              ["5 Modelltypen", "im Direktvergleich"],
-              ["8 Kriterien", "objektiv bewertet"],
-              ["20+ FAQ", "beantwortet"],
-              ["Ratgeber", "vom Kauf bis Wartung"],
-            ].map(([k, v]) => (
-              <div key={k} className="min-w-0">
-                <div className="text-lg font-semibold md:text-2xl">{k}</div>
-                <div className="text-xs text-white/60 md:text-sm">{v}</div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
 
-      {/* Intro / Benefits */}
-      <section className="container-x py-20 md:py-28">
+      <section className="container-x py-20 md:py-28" aria-labelledby="warum">
         <div className="grid gap-10 md:grid-cols-[1fr_1.2fr] md:items-end">
           <div>
             <span className="text-xs font-medium uppercase tracking-widest text-accent">
-              Warum eine Poolüberdachung
+              Grundlagen
             </span>
-            <h2 className="mt-3 text-3xl md:text-5xl">
-              Mehr Saison. Weniger Aufwand. Sicherer Genuss.
+            <h2 id="warum" className="mt-3 text-3xl md:text-5xl">
+              Was eine Poolüberdachung leistet
             </h2>
           </div>
           <p className="text-muted-foreground md:text-lg">
-            Eine hochwertige Poolüberdachung ist eine der wirksamsten Investitionen für jeden
-            privaten Pool. Sie spart Energie, hält das Wasser sauber, verlängert die Badesaison
-            und erhöht die Sicherheit – bei richtiger Ausführung ein Leben lang.
+            Eine Überdachung wirkt gleichzeitig auf Temperatur, Sauberkeit, Sicherheit und
+            Betriebsaufwand eines Pools. Wie stark die Effekte ausfallen, hängt von Bauform,
+            Material und Nutzung ab. Ein Überblick über die wichtigsten{" "}
+            <Link to="/vorteile" className="text-primary underline-offset-4 hover:underline">
+              Vorteile im Alltag
+            </Link>
+            .
           </p>
         </div>
 
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {benefits.map((b) => (
-            <div
+            <article
               key={b.title}
               className="group rounded-2xl border border-border bg-white p-6 shadow-[var(--shadow-soft)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-elegant)]"
             >
-              <div className="mb-5 grid h-11 w-11 place-items-center rounded-xl bg-primary/5 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                <b.icon className="h-5 w-5" />
+              <div className="mb-5 grid h-11 w-11 place-items-center rounded-xl bg-primary/5 text-primary">
+                <b.icon className="h-5 w-5" aria-hidden="true" />
               </div>
-              <h3 className="text-lg font-semibold text-foreground">{b.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{b.text}</p>
-            </div>
+              <h3 className="text-lg font-semibold">{b.title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{b.text}</p>
+            </article>
           ))}
         </div>
       </section>
 
-      {/* Model preview strip */}
-      <section className="container-x py-8 md:py-16">
-        <div className="mb-10">
+      <section className="container-x pb-8 md:pb-16" aria-labelledby="themen">
+        <div className="mb-10 max-w-2xl">
           <span className="text-xs font-medium uppercase tracking-widest text-accent">
-            Modellübersicht
+            Themenschwerpunkte
           </span>
-          <h2 className="mt-3 text-3xl md:text-5xl">Für jeden Garten die passende Bauart</h2>
+          <h2 id="themen" className="mt-3 text-3xl md:text-5xl">
+            Wo Sie am besten einsteigen
+          </h2>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
-          {modelPreviews.map((m) => (
+          {topics.map((t) => (
             <Link
-              key={m.to}
-              to={m.to as any}
+              key={t.to}
+              to={t.to}
               className="group relative overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-white to-mist p-8 transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-elegant)]"
             >
-              <div className="absolute right-6 top-6 text-muted-foreground transition-transform group-hover:translate-x-1">
-                <ArrowRight className="h-5 w-5" />
+              <div className="mb-5 grid h-11 w-11 place-items-center rounded-xl bg-primary/5 text-primary">
+                <t.icon className="h-5 w-5" aria-hidden="true" />
               </div>
-              <h3 className="text-xl font-semibold">{m.title}</h3>
-              <p className="mt-2 max-w-xs text-sm text-muted-foreground">{m.text}</p>
+              <h3 className="text-xl font-semibold">{t.title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{t.text}</p>
+              <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-primary">
+                {t.cta}
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </span>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* Hersteller im Überblick */}
-      <section className="container-x py-16 md:py-24">
+      <section className="container-x py-16 md:py-24" aria-labelledby="einblicke">
         <div className="mb-10 max-w-2xl">
           <span className="text-xs font-medium uppercase tracking-widest text-accent">
-            Hersteller im Überblick
+            Einblicke
           </span>
-          <h2 className="mt-3 text-3xl md:text-5xl">Vier Anbieter, ein Beispielbild</h2>
+          <h2 id="einblicke" className="mt-3 text-3xl md:text-5xl">
+            Poolüberdachungen in der Praxis
+          </h2>
           <p className="mt-4 text-muted-foreground md:text-lg">
-            Ein visueller Eindruck der wichtigsten Hersteller in unserem Vergleich – jeweils
-            mit einem repräsentativen Beispiel.
+            Realisierte Anlagen zeigen, wie unterschiedlich Bauform, Höhe und Materialwahl auf
+            Garten und Nutzung wirken.
           </p>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {manufacturers.map((m) => (
-            <a
-              key={m.name}
-              href={m.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-[var(--shadow-soft)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-elegant)]"
-            >
-              <div className="aspect-[4/3] overflow-hidden bg-mist">
-                <img
-                  src={m.img}
-                  alt={`Beispielbild einer Poolüberdachung von ${m.name}`}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-              <div className="flex flex-1 flex-col p-5">
-                <div className="flex items-center justify-between gap-2">
-                  <h3 className="font-display text-xl text-foreground">{m.name}</h3>
-                  <ExternalLink className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary" />
-                </div>
-                <div className="mt-1 text-[11px] uppercase tracking-widest text-muted-foreground">
-                  {m.origin}
-                </div>
-                <p className="mt-3 text-sm text-muted-foreground">{m.note}</p>
-              </div>
-            </a>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {[IMAGES.kundenprojekt, IMAGES.abend, IMAGES.detail].map((img) => (
+            <figure key={img.src} className="overflow-hidden rounded-2xl border border-border bg-mist">
+              <img
+                src={img.src}
+                alt={img.alt}
+                title={img.title}
+                width={img.width}
+                height={img.height}
+                loading="lazy"
+                decoding="async"
+                className="aspect-[4/3] w-full object-cover transition-transform duration-500 hover:scale-105"
+              />
+              <figcaption className="p-4 text-sm text-muted-foreground">{img.title}</figcaption>
+            </figure>
           ))}
         </div>
         <p className="mt-6 text-xs text-muted-foreground">
-          Bildquellen: offizielle Herstellerseiten. Verlinkt zu Informationszwecken.
+          Bildmaterial: Paradiso Poolüberdachungen, mit Genehmigung verwendet.
         </p>
       </section>
 
-
-      {/* Trust / transparency */}
-      <section className="container-x my-16">
-        <div className="rounded-3xl border border-border bg-gradient-to-br from-mist to-white p-8 md:p-12">
-          <div className="grid gap-8 md:grid-cols-[auto_1fr] md:items-start">
-            <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-primary/10 text-primary">
-              <ShieldCheck className="h-7 w-7" />
-            </div>
-            <div className="min-w-0">
-              <h2 className="text-2xl md:text-3xl">Transparent und ehrlich</h2>
-              <p className="mt-3 text-muted-foreground md:text-lg">
-                Wir vergleichen nach nachvollziehbaren Kriterien und veröffentlichen nur Aussagen,
-                die sich auf öffentlich zugängliche Informationen stützen. Wo Daten fehlen, weisen
-                wir das ausdrücklich aus, statt Spitzenplatzierungen zu behaupten.
-              </p>
-              <Link
-                to="/vergleich"
-                className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-[var(--shadow-soft)] transition-all hover:-translate-y-0.5"
-              >
-                Zum Vergleich
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ParadisoFazit />
     </>
   );
 }
