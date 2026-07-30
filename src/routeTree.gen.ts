@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as VorteileRouteImport } from './routes/vorteile'
 import { Route as VergleichRouteImport } from './routes/vergleich'
 import { Route as UeberUnsRouteImport } from './routes/ueber-uns'
+import { Route as UeberDieseWebsiteRouteImport } from './routes/ueber-diese-website'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SchienenlosePoolueberdachungenRouteImport } from './routes/schienenlose-poolueberdachungen'
 import { Route as RatgeberRouteImport } from './routes/ratgeber'
@@ -37,6 +38,11 @@ const VergleichRoute = VergleichRouteImport.update({
 const UeberUnsRoute = UeberUnsRouteImport.update({
   id: '/ueber-uns',
   path: '/ueber-uns',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UeberDieseWebsiteRoute = UeberDieseWebsiteRouteImport.update({
+  id: '/ueber-diese-website',
+  path: '/ueber-diese-website',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -108,6 +114,7 @@ export interface FileRoutesByFullPath {
   '/ratgeber': typeof RatgeberRoute
   '/schienenlose-poolueberdachungen': typeof SchienenlosePoolueberdachungenRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/ueber-diese-website': typeof UeberDieseWebsiteRoute
   '/ueber-uns': typeof UeberUnsRoute
   '/vergleich': typeof VergleichRoute
   '/vorteile': typeof VorteileRoute
@@ -124,6 +131,7 @@ export interface FileRoutesByTo {
   '/ratgeber': typeof RatgeberRoute
   '/schienenlose-poolueberdachungen': typeof SchienenlosePoolueberdachungenRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/ueber-diese-website': typeof UeberDieseWebsiteRoute
   '/ueber-uns': typeof UeberUnsRoute
   '/vergleich': typeof VergleichRoute
   '/vorteile': typeof VorteileRoute
@@ -141,6 +149,7 @@ export interface FileRoutesById {
   '/ratgeber': typeof RatgeberRoute
   '/schienenlose-poolueberdachungen': typeof SchienenlosePoolueberdachungenRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/ueber-diese-website': typeof UeberDieseWebsiteRoute
   '/ueber-uns': typeof UeberUnsRoute
   '/vergleich': typeof VergleichRoute
   '/vorteile': typeof VorteileRoute
@@ -159,6 +168,7 @@ export interface FileRouteTypes {
     | '/ratgeber'
     | '/schienenlose-poolueberdachungen'
     | '/sitemap.xml'
+    | '/ueber-diese-website'
     | '/ueber-uns'
     | '/vergleich'
     | '/vorteile'
@@ -175,6 +185,7 @@ export interface FileRouteTypes {
     | '/ratgeber'
     | '/schienenlose-poolueberdachungen'
     | '/sitemap.xml'
+    | '/ueber-diese-website'
     | '/ueber-uns'
     | '/vergleich'
     | '/vorteile'
@@ -191,6 +202,7 @@ export interface FileRouteTypes {
     | '/ratgeber'
     | '/schienenlose-poolueberdachungen'
     | '/sitemap.xml'
+    | '/ueber-diese-website'
     | '/ueber-uns'
     | '/vergleich'
     | '/vorteile'
@@ -208,6 +220,7 @@ export interface RootRouteChildren {
   RatgeberRoute: typeof RatgeberRoute
   SchienenlosePoolueberdachungenRoute: typeof SchienenlosePoolueberdachungenRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  UeberDieseWebsiteRoute: typeof UeberDieseWebsiteRoute
   UeberUnsRoute: typeof UeberUnsRoute
   VergleichRoute: typeof VergleichRoute
   VorteileRoute: typeof VorteileRoute
@@ -234,6 +247,13 @@ declare module '@tanstack/react-router' {
       path: '/ueber-uns'
       fullPath: '/ueber-uns'
       preLoaderRoute: typeof UeberUnsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ueber-diese-website': {
+      id: '/ueber-diese-website'
+      path: '/ueber-diese-website'
+      fullPath: '/ueber-diese-website'
+      preLoaderRoute: typeof UeberDieseWebsiteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -328,6 +348,7 @@ const rootRouteChildren: RootRouteChildren = {
   RatgeberRoute: RatgeberRoute,
   SchienenlosePoolueberdachungenRoute: SchienenlosePoolueberdachungenRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  UeberDieseWebsiteRoute: UeberDieseWebsiteRoute,
   UeberUnsRoute: UeberUnsRoute,
   VergleichRoute: VergleichRoute,
   VorteileRoute: VorteileRoute,
