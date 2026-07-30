@@ -57,13 +57,12 @@ function Kontakt() {
             </li>
             <li className="flex gap-3">
               <Mail className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
-              <span>
-                Die vollständigen Kontaktdaten finden Sie im{" "}
-                <a href="/impressum" className="text-primary underline-offset-4 hover:underline">
-                  Impressum
-                </a>
-                .
-              </span>
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="text-primary underline-offset-4 hover:underline"
+              >
+                {CONTACT_EMAIL}
+              </a>
             </li>
           </ul>
         </div>
