@@ -15,6 +15,7 @@ import { Route as UeberUnsRouteImport } from './routes/ueber-uns'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SchienenlosePoolueberdachungenRouteImport } from './routes/schienenlose-poolueberdachungen'
 import { Route as RatgeberRouteImport } from './routes/ratgeber'
+import { Route as PflegeWartungRouteImport } from './routes/pflege-wartung'
 import { Route as ModelleRouteImport } from './routes/modelle'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as ImpressumRouteImport } from './routes/impressum'
@@ -51,6 +52,11 @@ const SchienenlosePoolueberdachungenRoute =
 const RatgeberRoute = RatgeberRouteImport.update({
   id: '/ratgeber',
   path: '/ratgeber',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PflegeWartungRoute = PflegeWartungRouteImport.update({
+  id: '/pflege-wartung',
+  path: '/pflege-wartung',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ModelleRoute = ModelleRouteImport.update({
@@ -91,6 +97,7 @@ export interface FileRoutesByFullPath {
   '/impressum': typeof ImpressumRoute
   '/kontakt': typeof KontaktRoute
   '/modelle': typeof ModelleRoute
+  '/pflege-wartung': typeof PflegeWartungRoute
   '/ratgeber': typeof RatgeberRoute
   '/schienenlose-poolueberdachungen': typeof SchienenlosePoolueberdachungenRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -105,6 +112,7 @@ export interface FileRoutesByTo {
   '/impressum': typeof ImpressumRoute
   '/kontakt': typeof KontaktRoute
   '/modelle': typeof ModelleRoute
+  '/pflege-wartung': typeof PflegeWartungRoute
   '/ratgeber': typeof RatgeberRoute
   '/schienenlose-poolueberdachungen': typeof SchienenlosePoolueberdachungenRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -120,6 +128,7 @@ export interface FileRoutesById {
   '/impressum': typeof ImpressumRoute
   '/kontakt': typeof KontaktRoute
   '/modelle': typeof ModelleRoute
+  '/pflege-wartung': typeof PflegeWartungRoute
   '/ratgeber': typeof RatgeberRoute
   '/schienenlose-poolueberdachungen': typeof SchienenlosePoolueberdachungenRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -136,6 +145,7 @@ export interface FileRouteTypes {
     | '/impressum'
     | '/kontakt'
     | '/modelle'
+    | '/pflege-wartung'
     | '/ratgeber'
     | '/schienenlose-poolueberdachungen'
     | '/sitemap.xml'
@@ -150,6 +160,7 @@ export interface FileRouteTypes {
     | '/impressum'
     | '/kontakt'
     | '/modelle'
+    | '/pflege-wartung'
     | '/ratgeber'
     | '/schienenlose-poolueberdachungen'
     | '/sitemap.xml'
@@ -164,6 +175,7 @@ export interface FileRouteTypes {
     | '/impressum'
     | '/kontakt'
     | '/modelle'
+    | '/pflege-wartung'
     | '/ratgeber'
     | '/schienenlose-poolueberdachungen'
     | '/sitemap.xml'
@@ -179,6 +191,7 @@ export interface RootRouteChildren {
   ImpressumRoute: typeof ImpressumRoute
   KontaktRoute: typeof KontaktRoute
   ModelleRoute: typeof ModelleRoute
+  PflegeWartungRoute: typeof PflegeWartungRoute
   RatgeberRoute: typeof RatgeberRoute
   SchienenlosePoolueberdachungenRoute: typeof SchienenlosePoolueberdachungenRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -229,6 +242,13 @@ declare module '@tanstack/react-router' {
       path: '/ratgeber'
       fullPath: '/ratgeber'
       preLoaderRoute: typeof RatgeberRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pflege-wartung': {
+      id: '/pflege-wartung'
+      path: '/pflege-wartung'
+      fullPath: '/pflege-wartung'
+      preLoaderRoute: typeof PflegeWartungRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/modelle': {
@@ -283,6 +303,7 @@ const rootRouteChildren: RootRouteChildren = {
   ImpressumRoute: ImpressumRoute,
   KontaktRoute: KontaktRoute,
   ModelleRoute: ModelleRoute,
+  PflegeWartungRoute: PflegeWartungRoute,
   RatgeberRoute: RatgeberRoute,
   SchienenlosePoolueberdachungenRoute: SchienenlosePoolueberdachungenRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
