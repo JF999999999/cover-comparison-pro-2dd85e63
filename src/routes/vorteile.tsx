@@ -1,11 +1,30 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Sun, Droplets, Zap, Lock, TrendingUp, Leaf } from "lucide-react";
+import { Sun, Droplets, Lock, Leaf, Sparkles, Timer, ShieldCheck, Home } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
-import { CTASection } from "@/components/site/CTA";
+import { Breadcrumbs, breadcrumbJsonLd } from "@/components/site/Breadcrumbs";
+import { ParadisoFazit } from "@/components/site/ParadisoFazit";
+import { IMAGES, absoluteImageUrl } from "@/lib/images";
+import { SITE_URL } from "@/lib/site";
 
-const TITLE = "Vorteile einer Poolüberdachung – Energie, Sicherheit, Werterhalt";
+const TITLE = "Vorteile einer Poolüberdachung – Nutzen im Überblick";
 const DESCRIPTION =
-  "Alle Vorteile einer Poolüberdachung im Überblick: Energie sparen, Wasser sauber halten, Badesaison verlängern, Sicherheit und Werterhöhung.";
+  "Wärmeschutz, längere Badesaison, Sicherheit, weniger Reinigung und geringerer Chemikalienbedarf: die wichtigsten Vorteile einer Poolüberdachung im Alltag.";
+
+const crumbs = [
+  { label: "Startseite", to: "/" },
+  { label: "Vorteile" },
+];
+
+const items = [
+  { icon: Sun, title: "Längere Badesaison", text: "Wärmerückhalt und Sonneneinstrahlung machen den Pool früher im Jahr nutzbar und verlängern die Saison in den Herbst hinein." },
+  { icon: Timer, title: "Schnellere Erwärmung", text: "Das Luftvolumen unter der Überdachung heizt sich auf und gibt Wärme an das Wasser ab – besonders wirksam bei flachen Bauformen." },
+  { icon: Droplets, title: "Weniger Verdunstung", text: "Eine geschlossene Überdachung reduziert die Wasserverdunstung deutlich und senkt damit Nachfüllbedarf und Wärmeverlust." },
+  { icon: Sparkles, title: "Deutlich weniger Schmutz", text: "Laub, Pollen, Insekten und Staub gelangen kaum ins Wasser. Filter und Reinigungsroboter werden spürbar entlastet." },
+  { icon: Leaf, title: "Geringerer Chemikalienbedarf", text: "Weniger Schmutzeintrag und stabilere Wassertemperaturen führen in der Regel zu einem gleichmäßigeren, sparsameren Chemieeinsatz." },
+  { icon: Lock, title: "Mehr Sicherheit", text: "Verschlossene Überdachungen erschweren den unbeaufsichtigten Zugang – ein wichtiger Beitrag zur Sicherheit im Familiengarten." },
+  { icon: ShieldCheck, title: "Schutz der Technik", text: "Beckenrand, Folie und Einbauteile sind weniger UV-Strahlung und Witterung ausgesetzt und altern langsamer." },
+  { icon: Home, title: "Gewinn an Aufenthaltsqualität", text: "Hohe und begehbare Modelle schaffen einen wettergeschützten Raum, der sich auch außerhalb der Badezeit nutzen lässt." },
+];
 
 export const Route = createFileRoute("/vorteile")({
   head: () => ({
@@ -14,100 +33,90 @@ export const Route = createFileRoute("/vorteile")({
       { name: "description", content: DESCRIPTION },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
-      { property: "og:url", content: "/vorteile" },
+      { property: "og:type", content: "article" },
+      { property: "og:url", content: `${SITE_URL}/vorteile` },
+      { property: "og:image", content: absoluteImageUrl(IMAGES.abend) },
+      { name: "twitter:image", content: absoluteImageUrl(IMAGES.abend) },
     ],
-    links: [{ rel: "canonical", href: "/vorteile" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/vorteile` }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify([
+          breadcrumbJsonLd(crumbs),
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: TITLE,
+            description: DESCRIPTION,
+            inLanguage: "de-DE",
+            image: absoluteImageUrl(IMAGES.abend),
+            author: { "@type": "Person", name: "Carsten Fels" },
+          },
+        ]),
+      },
+    ],
   }),
   component: Vorteile,
 });
 
-const points = [
-  {
-    icon: Zap,
-    title: "Energie sparen",
-    text: "Eine geschlossene Poolüberdachung reduziert Wärme- und Verdunstungsverluste deutlich – der Heizaufwand sinkt spürbar und Sie sparen Betriebskosten.",
-  },
-  {
-    icon: Droplets,
-    title: "Wasser sauber halten",
-    text: "Laub, Insekten, Pollen und Staub bleiben draußen. Sie benötigen weniger Chemie und deutlich weniger Zeit für die Reinigung.",
-  },
-  {
-    icon: Sun,
-    title: "Badesaison verlängern",
-    text: "Das Wasser wird durch die Sonne unter dem Dach schneller warm und bleibt es länger. Je nach Modell bis zu mehreren Monaten mehr Badespaß pro Jahr.",
-  },
-  {
-    icon: Lock,
-    title: "Sicherheit für Kinder & Haustiere",
-    text: "Eine verschlossene Überdachung verhindert unbeaufsichtigten Zugang zum Wasser und erhöht die Sicherheit im Alltag deutlich.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Werterhöhung des Gartens",
-    text: "Ein hochwertig überdachter Pool wirkt gepflegt, ganzjährig einsatzbereit und steigert die Attraktivität Ihrer Immobilie.",
-  },
-  {
-    icon: Leaf,
-    title: "Weniger Wasser & Chemie",
-    text: "Deutlich reduzierte Verdunstung bedeutet weniger Nachfüllen und einen stabileren Chemikalien-Haushalt – gut für Umwelt und Geldbeutel.",
-  },
-];
-
 function Vorteile() {
   return (
     <>
+      <Breadcrumbs items={crumbs} />
       <PageHero
-        eyebrow="Vorteile"
-        title="Warum sich eine Poolüberdachung wirklich lohnt"
-        subtitle="Sechs Gründe, warum sich die Investition in eine hochwertige Poolüberdachung meist schon nach wenigen Jahren bezahlt macht."
+        eyebrow="Nutzen"
+        title="Vorteile einer Poolüberdachung"
+        subtitle="Eine Überdachung wirkt gleichzeitig auf Temperatur, Sauberkeit, Sicherheit und Betriebskosten – hier die wichtigsten Effekte im Überblick."
       />
 
-      <section className="container-x mt-14">
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {points.map((p) => (
-            <div
-              key={p.title}
-              className="group rounded-2xl border border-border bg-white p-8 shadow-[var(--shadow-soft)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-elegant)]"
-            >
-              <div className="mb-6 grid h-14 w-14 place-items-center rounded-2xl bg-primary/5 text-primary transition-all group-hover:bg-primary group-hover:text-primary-foreground">
-                <p.icon className="h-6 w-6" />
-              </div>
-              <h3 className="text-xl font-semibold text-foreground">{p.title}</h3>
-              <p className="mt-3 leading-relaxed text-muted-foreground">{p.text}</p>
+      <section className="container-x mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {items.map((i) => (
+          <article
+            key={i.title}
+            className="rounded-2xl border border-border bg-white p-6 shadow-[var(--shadow-soft)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-elegant)]"
+          >
+            <div className="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-primary/5 text-primary">
+              <i.icon className="h-5 w-5" aria-hidden="true" />
             </div>
-          ))}
-        </div>
+            <h2 className="text-lg font-semibold">{i.title}</h2>
+            <p className="mt-2 text-sm text-muted-foreground">{i.text}</p>
+          </article>
+        ))}
       </section>
 
-      <section className="container-x mt-20">
-        <div className="grid gap-10 rounded-3xl border border-border bg-mist p-8 md:grid-cols-2 md:p-14">
-          <div>
-            <h2 className="text-3xl md:text-4xl">Kurz zusammengefasst</h2>
-            <p className="mt-4 text-muted-foreground">
-              Eine Poolüberdachung ist eine der wirkungsvollsten Ergänzungen für jeden
-              privaten Pool – wirtschaftlich, praktisch und optisch.
+      <section className="container-x mt-20 grid items-center gap-12 md:grid-cols-2 md:gap-16">
+        <figure className="overflow-hidden rounded-3xl border border-border bg-mist shadow-[var(--shadow-soft)]">
+          <img
+            src={IMAGES.abend.src}
+            alt={IMAGES.abend.alt}
+            title={IMAGES.abend.title}
+            width={IMAGES.abend.width}
+            height={IMAGES.abend.height}
+            loading="lazy"
+            decoding="async"
+            className="aspect-[4/3] w-full object-cover"
+          />
+        </figure>
+        <div>
+          <h2 className="text-3xl md:text-4xl">Wirtschaftlich über die Jahre</h2>
+          <div className="mt-5 space-y-4 text-muted-foreground md:text-lg">
+            <p>
+              Die spürbarsten Einsparungen entstehen durch geringere Wärmeverluste und weniger
+              Verdunstung. Beides wirkt sich unmittelbar auf Heizenergie, Wasserverbrauch und
+              Pflegeaufwand aus.
+            </p>
+            <p>
+              Hinzu kommt ein weniger offensichtlicher Effekt: Bauteile, die dauerhaft vor
+              Witterung und UV-Strahlung geschützt sind, altern langsamer. Über einen Zeitraum von
+              zehn bis zwanzig Jahren summiert sich das zu einem realen Werterhalt der gesamten
+              Poolanlage.
             </p>
           </div>
-          <ul className="space-y-3 text-foreground">
-            {[
-              "Deutlich reduzierte Heiz- und Betriebskosten",
-              "Weniger Pflege- und Reinigungsaufwand",
-              "Mehrere Wochen bis Monate zusätzliche Badesaison",
-              "Klar erhöhte Sicherheit für Kinder und Tiere",
-              "Nachhaltige Nutzung durch weniger Wasser und Chemie",
-              "Wertsteigerung des gesamten Außenbereichs",
-            ].map((t) => (
-              <li key={t} className="flex items-start gap-3">
-                <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-accent" />
-                <span>{t}</span>
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
 
-      <CTASection />
+      <ParadisoFazit text="Die Vorteile einer Überdachung entfalten sich erst über Jahre – vorausgesetzt, die Anlage bleibt leichtgängig, dicht und wartbar. Deshalb lohnt der Blick auf Verarbeitungsqualität und Serviceverfügbarkeit." />
     </>
   );
 }
