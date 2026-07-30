@@ -20,6 +20,7 @@ import { Route as ModelleRouteImport } from './routes/modelle'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as ImpressumRouteImport } from './routes/impressum'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as ErsatzteileRouteImport } from './routes/ersatzteile'
 import { Route as DatenschutzRouteImport } from './routes/datenschutz'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -79,6 +80,11 @@ const FaqRoute = FaqRouteImport.update({
   path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ErsatzteileRoute = ErsatzteileRouteImport.update({
+  id: '/ersatzteile',
+  path: '/ersatzteile',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DatenschutzRoute = DatenschutzRouteImport.update({
   id: '/datenschutz',
   path: '/datenschutz',
@@ -93,6 +99,7 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/datenschutz': typeof DatenschutzRoute
+  '/ersatzteile': typeof ErsatzteileRoute
   '/faq': typeof FaqRoute
   '/impressum': typeof ImpressumRoute
   '/kontakt': typeof KontaktRoute
@@ -108,6 +115,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/datenschutz': typeof DatenschutzRoute
+  '/ersatzteile': typeof ErsatzteileRoute
   '/faq': typeof FaqRoute
   '/impressum': typeof ImpressumRoute
   '/kontakt': typeof KontaktRoute
@@ -124,6 +132,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/datenschutz': typeof DatenschutzRoute
+  '/ersatzteile': typeof ErsatzteileRoute
   '/faq': typeof FaqRoute
   '/impressum': typeof ImpressumRoute
   '/kontakt': typeof KontaktRoute
@@ -141,6 +150,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/datenschutz'
+    | '/ersatzteile'
     | '/faq'
     | '/impressum'
     | '/kontakt'
@@ -156,6 +166,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/datenschutz'
+    | '/ersatzteile'
     | '/faq'
     | '/impressum'
     | '/kontakt'
@@ -171,6 +182,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/datenschutz'
+    | '/ersatzteile'
     | '/faq'
     | '/impressum'
     | '/kontakt'
@@ -187,6 +199,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DatenschutzRoute: typeof DatenschutzRoute
+  ErsatzteileRoute: typeof ErsatzteileRoute
   FaqRoute: typeof FaqRoute
   ImpressumRoute: typeof ImpressumRoute
   KontaktRoute: typeof KontaktRoute
@@ -279,6 +292,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ersatzteile': {
+      id: '/ersatzteile'
+      path: '/ersatzteile'
+      fullPath: '/ersatzteile'
+      preLoaderRoute: typeof ErsatzteileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/datenschutz': {
       id: '/datenschutz'
       path: '/datenschutz'
@@ -299,6 +319,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DatenschutzRoute: DatenschutzRoute,
+  ErsatzteileRoute: ErsatzteileRoute,
   FaqRoute: FaqRoute,
   ImpressumRoute: ImpressumRoute,
   KontaktRoute: KontaktRoute,
