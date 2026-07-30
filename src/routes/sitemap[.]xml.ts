@@ -1,8 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
-// TODO: replace with your project URL once a project name or custom domain is set.
-const BASE_URL = "";
+const BASE_URL = "https://cover-comparison-pro.lovable.app";
 
 interface SitemapEntry {
   path: string;
@@ -16,12 +15,14 @@ export const Route = createFileRoute("/sitemap.xml")({
       GET: async () => {
         const entries: SitemapEntry[] = [
           { path: "/", changefreq: "weekly", priority: "1.0" },
-          { path: "/vergleich", changefreq: "weekly", priority: "0.9" },
-          { path: "/modelle", changefreq: "monthly", priority: "0.8" },
-          { path: "/ratgeber", changefreq: "monthly", priority: "0.8" },
-          { path: "/vorteile", changefreq: "monthly", priority: "0.7" },
+          { path: "/modelle", changefreq: "monthly", priority: "0.9" },
+          { path: "/schienenlose-poolueberdachungen", changefreq: "monthly", priority: "0.9" },
+          { path: "/ratgeber", changefreq: "monthly", priority: "0.9" },
+          { path: "/vorteile", changefreq: "monthly", priority: "0.8" },
+          { path: "/pflege-wartung", changefreq: "monthly", priority: "0.8" },
+          { path: "/ersatzteile", changefreq: "monthly", priority: "0.8" },
           { path: "/faq", changefreq: "monthly", priority: "0.7" },
-          { path: "/ueber-uns", changefreq: "yearly", priority: "0.4" },
+          { path: "/ueber-diese-website", changefreq: "yearly", priority: "0.4" },
           { path: "/kontakt", changefreq: "yearly", priority: "0.4" },
         ];
 
