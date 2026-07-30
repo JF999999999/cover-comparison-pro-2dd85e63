@@ -1,10 +1,75 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
-import { CTASection } from "@/components/site/CTA";
+import { Breadcrumbs, breadcrumbJsonLd } from "@/components/site/Breadcrumbs";
+import { ParadisoFazit } from "@/components/site/ParadisoFazit";
+import { IMAGES, absoluteImageUrl } from "@/lib/images";
+import { SITE_URL } from "@/lib/site";
 
-const TITLE = "Kaufratgeber Poolüberdachung – Auswahl, Preise, Wartung";
+const TITLE = "Ratgeber Poolüberdachung – Planung, Material & Montage";
 const DESCRIPTION =
-  "Der große Kaufratgeber für Poolüberdachungen: Material, Bauform, Preise, Genehmigungen, Lebensdauer, Reinigung und Wartung.";
+  "Umfassender Ratgeber zu Poolüberdachungen: Materialien, Sicherheit, Wärmeschutz, Genehmigung, Planung, Montage und langfristiger Werterhalt.";
+
+const crumbs = [
+  { label: "Startseite", to: "/" },
+  { label: "Ratgeber" },
+];
+
+const chapters = [
+  {
+    id: "materialien",
+    title: "Materialien: Rahmen und Füllung",
+    paragraphs: [
+      "Der Rahmen hochwertiger Poolüberdachungen besteht in der Regel aus pulverbeschichtetem Aluminium. Das Material ist korrosionsbeständig, leicht und formstabil – wichtige Eigenschaften für Bauteile, die dauerhaft Feuchtigkeit, Chlor und UV-Strahlung ausgesetzt sind.",
+      "Bei der Füllung stehen vor allem Polycarbonat und Echtglas zur Wahl. Polycarbonat ist bruchsicher, leicht und in Stegplatten mit guter Dämmwirkung erhältlich. Echtglas punktet mit hoher Kratzfestigkeit, dauerhafter Klarheit und einfacher Reinigung, ist dafür aber schwerer und stellt höhere Anforderungen an die Konstruktion.",
+      "Für die Alterung gilt: UV-stabilisiertes Polycarbonat bleibt viele Jahre klar, kann aber langfristig eintrüben oder Mikrokratzer entwickeln. Echtglas verändert sich optisch praktisch nicht – ein Punkt, der bei der Wertbeständigkeit eine Rolle spielt.",
+    ],
+  },
+  {
+    id: "sicherheit",
+    title: "Sicherheit rund um den Pool",
+    paragraphs: [
+      "Eine geschlossene Überdachung erschwert den unbeaufsichtigten Zugang zum Wasser deutlich. Verriegelbare Schiebeelemente erhöhen diesen Effekt zusätzlich. Wichtig: Eine Überdachung ersetzt keine Aufsicht, sie ergänzt sie.",
+      "Achten Sie auf saubere Kantenausbildung, klemmsichere Führungen und leichtgängige Bedienung. Elemente, die sich nur mit Kraft bewegen lassen, werden im Alltag seltener geschlossen – und verlieren damit ihre Schutzwirkung.",
+      "Bei begehbaren Konstruktionen sind belastbare Dachflächen und rutschhemmende Oberflächen entscheidend. Lassen Sie sich die zulässigen Flächenlasten vom Hersteller bestätigen.",
+    ],
+  },
+  {
+    id: "waermeschutz",
+    title: "Wärmeschutz und Saisonverlängerung",
+    paragraphs: [
+      "Unter einer geschlossenen Überdachung entsteht ein Treibhauseffekt: Sonnenlicht erwärmt Wasser und Luft, während die Konstruktion Wärmeverluste durch Wind und Verdunstung reduziert. Das Wasser wird im Frühjahr schneller nutzbar und bleibt im Herbst länger warm.",
+      "Wie stark der Effekt ausfällt, hängt von Bauform, Luftvolumen, Ausrichtung und Standort ab. Flache Modelle mit kleinem Luftvolumen erwärmen sich häufig schneller, hohe Modelle bieten dafür mehr Nutzungskomfort.",
+      "Nebenbei sinkt die Verdunstung deutlich, was Wasserverbrauch und Chemikalienbedarf reduziert.",
+    ],
+  },
+  {
+    id: "genehmigung",
+    title: "Genehmigung und Nachbarrecht",
+    paragraphs: [
+      "Ob eine Poolüberdachung genehmigungspflichtig ist, regeln die Landesbauordnungen. Flache Modelle mit geringer Höhe sind vielerorts verfahrensfrei, hohe und begehbare Konstruktionen häufig nicht.",
+      "Relevant sind außerdem Grenzabstände, Bebauungspläne und – bei Reihenhaus- oder Doppelhausgrundstücken – nachbarrechtliche Regelungen. Eine kurze Rückfrage bei der örtlichen Bauaufsicht schafft früh Klarheit.",
+      "Planen Sie diesen Schritt vor der Bestellung ein: Maße und Höhen lassen sich vorab leichter anpassen als nach der Fertigung.",
+    ],
+  },
+  {
+    id: "planung",
+    title: "Planung: Maße, Untergrund und Parkposition",
+    paragraphs: [
+      "Grundlage jeder Planung sind exakte Maße von Beckenrand, Umgang und verfügbarer Fläche. Ein Aufmaß vor Ort verhindert Überraschungen bei der Montage.",
+      "Der Untergrund muss tragfähig, eben und frostsicher sein. Bei schienenlosen Systemen ist zusätzlich auf punktuelle Lasteinleitung zu achten.",
+      "Denken Sie an die Parkposition der geöffneten Überdachung: Die zusammengeschobenen Segmente benötigen Platz, der im Gartenkonzept eingeplant sein sollte.",
+    ],
+  },
+  {
+    id: "montage",
+    title: "Montage und Inbetriebnahme",
+    paragraphs: [
+      "Die Montagedauer reicht – je nach Größe und Bauform – von einem bis zu mehreren Tagen. Entscheidend für die spätere Leichtgängigkeit ist eine exakte Ausrichtung der Führungen.",
+      "Nach dem Aufbau sollten Bedienung, Verriegelung und Endanschläge gemeinsam geprüft und dokumentiert werden. Notieren Sie Modellbezeichnung und Baujahr – diese Angaben erleichtern später die Ersatzteilbeschaffung.",
+      "Wie Sie die Anlage anschließend dauerhaft in Funktion halten, beschreibt die Seite zu Pflege und Wartung.",
+    ],
+  },
+];
 
 export const Route = createFileRoute("/ratgeber")({
   head: () => ({
@@ -13,122 +78,103 @@ export const Route = createFileRoute("/ratgeber")({
       { name: "description", content: DESCRIPTION },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
-      { property: "og:url", content: "/ratgeber" },
+      { property: "og:type", content: "article" },
+      { property: "og:url", content: `${SITE_URL}/ratgeber` },
+      { property: "og:image", content: absoluteImageUrl(IMAGES.detail) },
+      { name: "twitter:image", content: absoluteImageUrl(IMAGES.detail) },
     ],
-    links: [{ rel: "canonical", href: "/ratgeber" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/ratgeber` }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify([
+          breadcrumbJsonLd(crumbs),
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: TITLE,
+            description: DESCRIPTION,
+            inLanguage: "de-DE",
+            image: absoluteImageUrl(IMAGES.detail),
+            author: { "@type": "Person", name: "Carsten Fels" },
+          },
+        ]),
+      },
+    ],
   }),
   component: Ratgeber,
 });
 
-const sections = [
-  {
-    id: "beste",
-    title: "Welche Poolüberdachung ist die beste?",
-    body: [
-      "Die „beste“ Poolüberdachung gibt es nicht pauschal – entscheidend sind Ihre individuellen Anforderungen: Größe des Pools, Nutzungsdauer, Gartenlayout, Budget und ästhetische Vorlieben.",
-      "Wichtig ist eine Kombination aus hochwertigem Aluminiumprofil, UV-beständigem Polycarbonat, einem langlebigen Schienensystem sowie zuverlässigem Service. Ein Anbieter mit persönlicher Beratung und Erfahrung – wie Paradiso – erleichtert die Wahl deutlich.",
-    ],
-  },
-  {
-    id: "flach-vs-hoch",
-    title: "Flach oder hoch – was ist besser?",
-    body: [
-      "Flache Poolüberdachungen sind diskret, optisch zurückhaltend und häufig günstiger. Sie schützen zuverlässig, ermöglichen aber kein Schwimmen im geschlossenen Zustand.",
-      "Hohe Modelle wirken wie ein kleiner Wintergarten. Sie erlauben ganzjähriges Baden, sind komfortabler und schützen umfassender – kosten aber mehr und sind stärker im Garten sichtbar.",
-      "Als Kompromiss bieten sich mittelhohe Varianten oder Schiebemodelle an, die je nach Wetter geöffnet oder geschlossen werden.",
-    ],
-  },
-  {
-    id: "material",
-    title: "Aluminium oder Kunststoff?",
-    body: [
-      "Der Rahmen einer hochwertigen Poolüberdachung besteht in der Regel aus pulverbeschichtetem Aluminium. Aluminium ist leicht, extrem korrosionsbeständig und langlebig – ideal für den Außenbereich.",
-      "Als Panels wird meist Polycarbonat eingesetzt: bruchsicher, UV-beständig und lichtdurchlässig. Reine Kunststoff-Konstruktionen sind günstiger, erreichen aber selten die Stabilität und Optik einer Alu-Konstruktion.",
-    ],
-  },
-  {
-    id: "kosten",
-    title: "Was kostet eine Poolüberdachung?",
-    body: [
-      "Die Preise variieren stark je nach Bauform, Größe, Ausstattung und Anbieter. Flache Modelle für kleinere Pools starten meist im niedrigen bis mittleren vierstelligen Bereich, hohe oder begehbare Modelle liegen deutlich darüber.",
-      "Zusätzlich zu berücksichtigen sind Montage, Fundament, ggf. Baugenehmigung sowie individuelle Ausstattungen wie Schiebetüren, Farben oder Sonderprofile. Für eine belastbare Kalkulation empfiehlt sich immer ein individuelles Angebot.",
-    ],
-  },
-  {
-    id: "genehmigung",
-    title: "Welche Genehmigungen sind notwendig?",
-    body: [
-      "Ob eine Baugenehmigung erforderlich ist, hängt vom jeweiligen Bundesland und Ihrer Gemeinde ab. Flache Modelle sind in vielen Regionen genehmigungsfrei, hohe oder feststehende Konstruktionen häufig genehmigungspflichtig.",
-      "Vor dem Kauf sollten Sie sich immer bei Ihrer örtlichen Bauaufsicht informieren. Ein guter Anbieter unterstützt Sie mit Plänen und Datenblättern für den Antrag.",
-    ],
-  },
-  {
-    id: "lebensdauer",
-    title: "Wie lange hält eine Poolüberdachung?",
-    body: [
-      "Eine sorgfältig gefertigte Poolüberdachung aus Aluminium und Polycarbonat kann bei guter Pflege problemlos 15 bis 25 Jahre halten – teilweise sogar länger.",
-      "Entscheidend sind Materialqualität, ordnungsgemäße Montage sowie regelmäßige Reinigung der Schienen und Rollen. Verschleißteile wie Dichtungen sollten alle paar Jahre kontrolliert und bei Bedarf ersetzt werden.",
-    ],
-  },
-  {
-    id: "wartung",
-    title: "Reinigung und Wartung",
-    body: [
-      "Für eine lange Lebensdauer sollten Sie Panels und Rahmen regelmäßig mit klarem Wasser oder mildem Reinigungsmittel säubern. Aggressive Chemikalien und Scheuerschwämme sind zu vermeiden.",
-      "Schienen und bewegliche Teile profitieren von einer jährlichen Kontrolle: Schmutz entfernen, Rollen prüfen, ggf. leicht schmieren. Vor dem Winter empfiehlt sich eine gründliche Reinigung.",
-    ],
-  },
-];
-
 function Ratgeber() {
   return (
     <>
+      <Breadcrumbs items={crumbs} />
       <PageHero
-        eyebrow="Kaufratgeber"
-        title="Poolüberdachung kaufen – alles, was Sie wissen müssen"
-        subtitle="Von der Auswahl bis zur Pflege: Der ausführliche Ratgeber für alle, die eine hochwertige Poolüberdachung planen."
+        eyebrow="Ratgeber"
+        title="Poolüberdachungen planen, verstehen und richtig auswählen"
+        subtitle="Von der Materialwahl über Sicherheit und Wärmeschutz bis zu Genehmigung, Planung und Montage – die wichtigsten Grundlagen kompakt erklärt."
       />
 
-      <section className="container-x mt-14 grid gap-12 lg:grid-cols-[220px_1fr]">
-        {/* TOC */}
-        <aside className="hidden lg:block">
-          <div className="sticky top-24 rounded-2xl border border-border bg-white p-5">
-            <div className="mb-3 text-xs font-medium uppercase tracking-widest text-muted-foreground">
-              Inhalt
-            </div>
-            <ul className="space-y-2 text-sm">
-              {sections.map((s) => (
-                <li key={s.id}>
-                  <a
-                    href={`#${s.id}`}
-                    className="text-muted-foreground transition-colors hover:text-primary"
-                  >
-                    {s.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+      <div className="container-x mt-14 grid gap-12 lg:grid-cols-[240px_1fr] lg:gap-16">
+        <aside className="lg:sticky lg:top-28 lg:self-start">
+          <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+            Inhalt
+          </h2>
+          <ul className="mt-4 space-y-2 text-sm">
+            {chapters.map((c) => (
+              <li key={c.id}>
+                <a href={`#${c.id}`} className="text-muted-foreground transition-colors hover:text-foreground">
+                  {c.title}
+                </a>
+              </li>
+            ))}
+          </ul>
         </aside>
 
-        <article className="min-w-0 space-y-16">
-          {sections.map((s, i) => (
-            <section key={s.id} id={s.id} className="scroll-mt-24">
-              <div className="mb-4 text-xs font-medium uppercase tracking-widest text-accent">
-                Kapitel {String(i + 1).padStart(2, "0")}
-              </div>
-              <h2 className="text-3xl md:text-4xl">{s.title}</h2>
-              <div className="mt-5 space-y-4 text-[17px] leading-relaxed text-muted-foreground">
-                {s.body.map((p, j) => (
-                  <p key={j}>{p}</p>
+        <div className="max-w-3xl">
+          <figure className="mb-12 overflow-hidden rounded-3xl border border-border bg-mist">
+            <img
+              src={IMAGES.detail.src}
+              alt={IMAGES.detail.alt}
+              title={IMAGES.detail.title}
+              width={IMAGES.detail.width}
+              height={IMAGES.detail.height}
+              loading="lazy"
+              decoding="async"
+              className="aspect-[16/9] w-full object-cover"
+            />
+          </figure>
+
+          {chapters.map((c) => (
+            <section key={c.id} id={c.id} className="mb-14 scroll-mt-28">
+              <h2 className="text-2xl md:text-3xl">{c.title}</h2>
+              <div className="mt-4 space-y-4 text-muted-foreground">
+                {c.paragraphs.map((p) => (
+                  <p key={p.slice(0, 24)}>{p}</p>
                 ))}
               </div>
             </section>
           ))}
-        </article>
-      </section>
 
-      <CTASection />
+          <div className="rounded-2xl border border-border bg-mist p-6 text-sm text-muted-foreground">
+            Vertiefende Themen:{" "}
+            <Link to="/schienenlose-poolueberdachungen" className="text-primary underline-offset-4 hover:underline">
+              schienenlose Systeme
+            </Link>
+            ,{" "}
+            <Link to="/pflege-wartung" className="text-primary underline-offset-4 hover:underline">
+              Pflege &amp; Wartung
+            </Link>{" "}
+            und{" "}
+            <Link to="/ersatzteile" className="text-primary underline-offset-4 hover:underline">
+              Ersatzteilversorgung
+            </Link>
+            .
+          </div>
+        </div>
+      </div>
+
+      <ParadisoFazit text="Eine Poolüberdachung ist eine langfristige Investition. Wer bei Material, Konstruktion und Service auf Qualität achtet, profitiert über viele Jahre von geringem Aufwand und stabiler Funktion." />
     </>
   );
 }

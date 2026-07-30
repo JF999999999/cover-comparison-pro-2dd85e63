@@ -11,13 +11,16 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VorteileRouteImport } from './routes/vorteile'
 import { Route as VergleichRouteImport } from './routes/vergleich'
-import { Route as UeberUnsRouteImport } from './routes/ueber-uns'
+import { Route as UeberDieseWebsiteRouteImport } from './routes/ueber-diese-website'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SchienenlosePoolueberdachungenRouteImport } from './routes/schienenlose-poolueberdachungen'
 import { Route as RatgeberRouteImport } from './routes/ratgeber'
+import { Route as PflegeWartungRouteImport } from './routes/pflege-wartung'
 import { Route as ModelleRouteImport } from './routes/modelle'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as ImpressumRouteImport } from './routes/impressum'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as ErsatzteileRouteImport } from './routes/ersatzteile'
 import { Route as DatenschutzRouteImport } from './routes/datenschutz'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -31,9 +34,9 @@ const VergleichRoute = VergleichRouteImport.update({
   path: '/vergleich',
   getParentRoute: () => rootRouteImport,
 } as any)
-const UeberUnsRoute = UeberUnsRouteImport.update({
-  id: '/ueber-uns',
-  path: '/ueber-uns',
+const UeberDieseWebsiteRoute = UeberDieseWebsiteRouteImport.update({
+  id: '/ueber-diese-website',
+  path: '/ueber-diese-website',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -41,9 +44,20 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SchienenlosePoolueberdachungenRoute =
+  SchienenlosePoolueberdachungenRouteImport.update({
+    id: '/schienenlose-poolueberdachungen',
+    path: '/schienenlose-poolueberdachungen',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const RatgeberRoute = RatgeberRouteImport.update({
   id: '/ratgeber',
   path: '/ratgeber',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PflegeWartungRoute = PflegeWartungRouteImport.update({
+  id: '/pflege-wartung',
+  path: '/pflege-wartung',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ModelleRoute = ModelleRouteImport.update({
@@ -66,6 +80,11 @@ const FaqRoute = FaqRouteImport.update({
   path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ErsatzteileRoute = ErsatzteileRouteImport.update({
+  id: '/ersatzteile',
+  path: '/ersatzteile',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DatenschutzRoute = DatenschutzRouteImport.update({
   id: '/datenschutz',
   path: '/datenschutz',
@@ -80,26 +99,32 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/datenschutz': typeof DatenschutzRoute
+  '/ersatzteile': typeof ErsatzteileRoute
   '/faq': typeof FaqRoute
   '/impressum': typeof ImpressumRoute
   '/kontakt': typeof KontaktRoute
   '/modelle': typeof ModelleRoute
+  '/pflege-wartung': typeof PflegeWartungRoute
   '/ratgeber': typeof RatgeberRoute
+  '/schienenlose-poolueberdachungen': typeof SchienenlosePoolueberdachungenRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/ueber-uns': typeof UeberUnsRoute
+  '/ueber-diese-website': typeof UeberDieseWebsiteRoute
   '/vergleich': typeof VergleichRoute
   '/vorteile': typeof VorteileRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/datenschutz': typeof DatenschutzRoute
+  '/ersatzteile': typeof ErsatzteileRoute
   '/faq': typeof FaqRoute
   '/impressum': typeof ImpressumRoute
   '/kontakt': typeof KontaktRoute
   '/modelle': typeof ModelleRoute
+  '/pflege-wartung': typeof PflegeWartungRoute
   '/ratgeber': typeof RatgeberRoute
+  '/schienenlose-poolueberdachungen': typeof SchienenlosePoolueberdachungenRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/ueber-uns': typeof UeberUnsRoute
+  '/ueber-diese-website': typeof UeberDieseWebsiteRoute
   '/vergleich': typeof VergleichRoute
   '/vorteile': typeof VorteileRoute
 }
@@ -107,13 +132,16 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/datenschutz': typeof DatenschutzRoute
+  '/ersatzteile': typeof ErsatzteileRoute
   '/faq': typeof FaqRoute
   '/impressum': typeof ImpressumRoute
   '/kontakt': typeof KontaktRoute
   '/modelle': typeof ModelleRoute
+  '/pflege-wartung': typeof PflegeWartungRoute
   '/ratgeber': typeof RatgeberRoute
+  '/schienenlose-poolueberdachungen': typeof SchienenlosePoolueberdachungenRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/ueber-uns': typeof UeberUnsRoute
+  '/ueber-diese-website': typeof UeberDieseWebsiteRoute
   '/vergleich': typeof VergleichRoute
   '/vorteile': typeof VorteileRoute
 }
@@ -122,39 +150,48 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/datenschutz'
+    | '/ersatzteile'
     | '/faq'
     | '/impressum'
     | '/kontakt'
     | '/modelle'
+    | '/pflege-wartung'
     | '/ratgeber'
+    | '/schienenlose-poolueberdachungen'
     | '/sitemap.xml'
-    | '/ueber-uns'
+    | '/ueber-diese-website'
     | '/vergleich'
     | '/vorteile'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/datenschutz'
+    | '/ersatzteile'
     | '/faq'
     | '/impressum'
     | '/kontakt'
     | '/modelle'
+    | '/pflege-wartung'
     | '/ratgeber'
+    | '/schienenlose-poolueberdachungen'
     | '/sitemap.xml'
-    | '/ueber-uns'
+    | '/ueber-diese-website'
     | '/vergleich'
     | '/vorteile'
   id:
     | '__root__'
     | '/'
     | '/datenschutz'
+    | '/ersatzteile'
     | '/faq'
     | '/impressum'
     | '/kontakt'
     | '/modelle'
+    | '/pflege-wartung'
     | '/ratgeber'
+    | '/schienenlose-poolueberdachungen'
     | '/sitemap.xml'
-    | '/ueber-uns'
+    | '/ueber-diese-website'
     | '/vergleich'
     | '/vorteile'
   fileRoutesById: FileRoutesById
@@ -162,13 +199,16 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DatenschutzRoute: typeof DatenschutzRoute
+  ErsatzteileRoute: typeof ErsatzteileRoute
   FaqRoute: typeof FaqRoute
   ImpressumRoute: typeof ImpressumRoute
   KontaktRoute: typeof KontaktRoute
   ModelleRoute: typeof ModelleRoute
+  PflegeWartungRoute: typeof PflegeWartungRoute
   RatgeberRoute: typeof RatgeberRoute
+  SchienenlosePoolueberdachungenRoute: typeof SchienenlosePoolueberdachungenRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
-  UeberUnsRoute: typeof UeberUnsRoute
+  UeberDieseWebsiteRoute: typeof UeberDieseWebsiteRoute
   VergleichRoute: typeof VergleichRoute
   VorteileRoute: typeof VorteileRoute
 }
@@ -189,11 +229,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VergleichRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/ueber-uns': {
-      id: '/ueber-uns'
-      path: '/ueber-uns'
-      fullPath: '/ueber-uns'
-      preLoaderRoute: typeof UeberUnsRouteImport
+    '/ueber-diese-website': {
+      id: '/ueber-diese-website'
+      path: '/ueber-diese-website'
+      fullPath: '/ueber-diese-website'
+      preLoaderRoute: typeof UeberDieseWebsiteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -203,11 +243,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/schienenlose-poolueberdachungen': {
+      id: '/schienenlose-poolueberdachungen'
+      path: '/schienenlose-poolueberdachungen'
+      fullPath: '/schienenlose-poolueberdachungen'
+      preLoaderRoute: typeof SchienenlosePoolueberdachungenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ratgeber': {
       id: '/ratgeber'
       path: '/ratgeber'
       fullPath: '/ratgeber'
       preLoaderRoute: typeof RatgeberRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pflege-wartung': {
+      id: '/pflege-wartung'
+      path: '/pflege-wartung'
+      fullPath: '/pflege-wartung'
+      preLoaderRoute: typeof PflegeWartungRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/modelle': {
@@ -238,6 +292,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ersatzteile': {
+      id: '/ersatzteile'
+      path: '/ersatzteile'
+      fullPath: '/ersatzteile'
+      preLoaderRoute: typeof ErsatzteileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/datenschutz': {
       id: '/datenschutz'
       path: '/datenschutz'
@@ -258,16 +319,29 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DatenschutzRoute: DatenschutzRoute,
+  ErsatzteileRoute: ErsatzteileRoute,
   FaqRoute: FaqRoute,
   ImpressumRoute: ImpressumRoute,
   KontaktRoute: KontaktRoute,
   ModelleRoute: ModelleRoute,
+  PflegeWartungRoute: PflegeWartungRoute,
   RatgeberRoute: RatgeberRoute,
+  SchienenlosePoolueberdachungenRoute: SchienenlosePoolueberdachungenRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
-  UeberUnsRoute: UeberUnsRoute,
+  UeberDieseWebsiteRoute: UeberDieseWebsiteRoute,
   VergleichRoute: VergleichRoute,
   VorteileRoute: VorteileRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

@@ -2,35 +2,40 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
-import { CTASection } from "@/components/site/CTA";
+import { Breadcrumbs, breadcrumbJsonLd } from "@/components/site/Breadcrumbs";
+import { ParadisoFazit } from "@/components/site/ParadisoFazit";
+import { SITE_URL } from "@/lib/site";
 
 const TITLE = "FAQ zu Poolüberdachungen – häufige Fragen & Antworten";
 const DESCRIPTION =
-  "20+ häufige Fragen und Antworten rund um Poolüberdachungen: Kosten, Material, Genehmigung, Montage, Pflege und mehr.";
+  "Häufige Fragen zu Poolüberdachungen: Bauformen, Material, Genehmigung, Sicherheit, Wärmeschutz, Reinigung, Montage und Ersatzteilverfügbarkeit.";
+
+const crumbs = [
+  { label: "Startseite", to: "/" },
+  { label: "FAQ" },
+];
 
 const faqs: { q: string; a: string }[] = [
-  { q: "Was ist eine Poolüberdachung?", a: "Eine Poolüberdachung ist eine feste oder verschiebbare Konstruktion, die einen Pool überdacht und ihn vor Wetter, Schmutz und Wärmeverlust schützt." },
-  { q: "Welche Arten von Poolüberdachungen gibt es?", a: "Man unterscheidet flache, mittelhohe, hohe, begehbare sowie Schiebeüberdachungen. Jede Bauform hat spezifische Vor- und Nachteile." },
-  { q: "Aus welchem Material besteht eine hochwertige Überdachung?", a: "Der Rahmen besteht meist aus pulverbeschichtetem Aluminium, die Panels aus UV-beständigem Polycarbonat. Diese Kombination ist langlebig und wartungsarm." },
-  { q: "Wie viel kostet eine Poolüberdachung?", a: "Die Preise variieren stark je nach Bauform, Größe und Ausstattung. Für konkrete Zahlen ist ein individuelles Angebot des Herstellers sinnvoll." },
-  { q: "Brauche ich eine Baugenehmigung?", a: "Das ist bundeslandabhängig. Flache Modelle sind oft genehmigungsfrei, hohe Konstruktionen häufig genehmigungspflichtig. Wenden Sie sich an Ihre örtliche Bauaufsicht." },
-  { q: "Wie lange hält eine Poolüberdachung?", a: "Bei guter Pflege und hochwertiger Fertigung sind 15–25 Jahre und mehr realistisch. Wichtig sind regelmäßige Wartung und Reinigung." },
-  { q: "Kann ich bei geschlossener Überdachung schwimmen?", a: "Bei hohen und einigen mittelhohen Modellen ist das problemlos möglich. Bei flachen Modellen muss die Überdachung dazu geöffnet werden." },
-  { q: "Verlängert eine Überdachung die Badesaison wirklich?", a: "Ja. Durch den Treibhauseffekt und den Wärmerückhalt wird das Wasser schneller warm und bleibt es länger – oft mehrere Wochen bis Monate zusätzlich." },
-  { q: "Wie sicher ist eine Poolüberdachung?", a: "Verschlossene Überdachungen erhöhen die Sicherheit deutlich, insbesondere gegen unbeaufsichtigten Zugang von Kindern und Haustieren." },
-  { q: "Ist eine Poolüberdachung sturmsicher?", a: "Hochwertige Konstruktionen aus stabilen Aluminiumprofilen sind für hohe Windlasten ausgelegt. Beachten Sie stets die Angaben des Herstellers." },
-  { q: "Wie reinige ich die Panels richtig?", a: "Mit klarem Wasser oder milden Reinigern und einem weichen Tuch. Aggressive Chemikalien und Scheuerschwämme sollten vermieden werden." },
-  { q: "Was muss bei den Schienen beachtet werden?", a: "Schienen sollten frei von Laub und Schmutz gehalten werden. Eine jährliche Kontrolle der Rollen sorgt für langen Laufkomfort." },
-  { q: "Kann eine Überdachung nachträglich installiert werden?", a: "Ja, viele Modelle lassen sich auch bei bestehenden Pools nachrüsten. Voraussetzung ist eine geeignete Auflagefläche." },
-  { q: "Ist die Konstruktion UV-beständig?", a: "Qualitätsprodukte verwenden UV-stabilisiertes Polycarbonat, das langfristig licht- und witterungsbeständig bleibt." },
-  { q: "Wie viel Energie spart eine Überdachung?", a: "Die Ersparnis hängt stark von Modell, Nutzung und Standort ab. Deutliche Reduktionen bei Heizung und Verdunstung sind aber typisch." },
-  { q: "Beeinträchtigt die Überdachung die Poolreinigung?", a: "Im Gegenteil: Da deutlich weniger Schmutz ins Wasser gelangt, sinkt der Reinigungsaufwand spürbar." },
-  { q: "Welche Farben sind erhältlich?", a: "Die Aluminiumprofile sind in verschiedenen RAL-Farben verfügbar. Anthrazit und Weiß gehören zu den beliebtesten Ausführungen." },
-  { q: "Kann ich das Modell individuell anpassen?", a: "Ja. Hersteller wie Paradiso bieten Maßanfertigungen und individuelle Konfigurationen an." },
-  { q: "Wie lange dauert die Montage?", a: "Je nach Modell und Größe zwischen einem und mehreren Tagen. Ein professioneller Aufbau spart Zeit und stellt eine korrekte Ausrichtung sicher." },
-  { q: "Kann die Überdachung im Winter draußen bleiben?", a: "Ja, die meisten Modelle sind ganzjährig einsetzbar. Wichtig ist, Schnee bei entsprechender Last zu räumen." },
-  { q: "Wie umweltfreundlich ist eine Poolüberdachung?", a: "Sie reduziert Wasserverdunstung, Chemiebedarf und Heizenergie – und trägt so aktiv zu einem nachhaltigeren Poolbetrieb bei." },
-  { q: "Was tun bei Verschleiß oder Beschädigung?", a: "Ersatzteile wie Dichtungen, Rollen und Panels sind bei seriösen Herstellern langfristig verfügbar. Ein guter Service ist hier entscheidend." },
+  { q: "Was ist eine Poolüberdachung?", a: "Eine Poolüberdachung ist eine feste oder verschiebbare Konstruktion über dem Pool. Sie schützt vor Verschmutzung und Witterung, reduziert Wärmeverluste und verlängert die nutzbare Badesaison." },
+  { q: "Welche Bauformen gibt es?", a: "Üblich sind flache, mittelhohe, hohe, begehbare sowie schiebbare Überdachungen. Sie unterscheiden sich vor allem in Bauhöhe, Innenraum und Nutzungsmöglichkeiten." },
+  { q: "Aus welchen Materialien besteht eine hochwertige Überdachung?", a: "Der Rahmen besteht meist aus pulverbeschichtetem Aluminium, die Füllung aus UV-stabilisiertem Polycarbonat oder Echtglas. Beide Füllungen haben eigene Stärken bei Gewicht, Kratzfestigkeit und Optik." },
+  { q: "Brauche ich eine Baugenehmigung?", a: "Das richtet sich nach der jeweiligen Landesbauordnung. Flache Modelle sind vielerorts verfahrensfrei, hohe und begehbare Konstruktionen häufig genehmigungspflichtig. Eine Rückfrage bei der örtlichen Bauaufsicht schafft Klarheit." },
+  { q: "Sind für ältere Poolüberdachungen noch Ersatzteile erhältlich?", a: "Das hängt stark vom Hersteller ab. Auch nach mehr als 20 Jahren können für viele Paradiso-Poolüberdachungen noch passende Ersatzteile verfügbar sein. Für eine verbindliche Aussage ist immer eine Prüfung des konkreten Modells nötig." },
+  { q: "Was sind schienenlose Poolüberdachungen?", a: "Bei schienenlosen Systemen entfallen durchgehende Bodenschienen im Terrassenbelag. Der Poolrand bleibt eben begehbar, und es sammelt sich weniger Schmutz in Führungskanälen." },
+  { q: "Kann ich bei geschlossener Überdachung schwimmen?", a: "Bei hohen und vielen mittelhohen Modellen ist das problemlos möglich. Flache Überdachungen müssen zum Schwimmen geöffnet werden." },
+  { q: "Verlängert eine Überdachung die Badesaison wirklich?", a: "Ja. Durch Wärmerückhalt und Treibhauseffekt wird das Wasser früher nutzbar und bleibt länger warm – je nach Standort und Bauform oft mehrere Wochen zusätzlich." },
+  { q: "Wie sicher ist eine Poolüberdachung?", a: "Eine verschlossene Überdachung erschwert den unbeaufsichtigten Zugang zum Wasser erheblich. Sie ersetzt jedoch keine Aufsicht, sondern ergänzt bestehende Sicherheitsmaßnahmen." },
+  { q: "Ist eine Poolüberdachung sturmsicher?", a: "Hochwertige Aluminiumkonstruktionen sind für definierte Wind- und Schneelasten ausgelegt. Entscheidend sind korrekte Verankerung und das Beachten der Herstellerangaben zum Standort." },
+  { q: "Wie reinige ich die Flächen richtig?", a: "Mit klarem Wasser oder milden, pH-neutralen Reinigern und einem weichen Tuch. Scheuermittel, Lösungsmittel und harte Bürsten sollten vermieden werden, da sie Mikrokratzer verursachen." },
+  { q: "Was ist bei Führungen und Rollen zu beachten?", a: "Sie sollten frei von Laub, Sand und Kies gehalten werden. Eine jährliche Kontrolle der Rollen und Laufflächen erhält die Leichtgängigkeit." },
+  { q: "Kann eine Überdachung nachträglich installiert werden?", a: "Ja, viele Systeme lassen sich bei bestehenden Pools nachrüsten. Voraussetzung sind ein tragfähiger, ebener Untergrund und ausreichend Platz für die Parkposition." },
+  { q: "Wie viel Energie spart eine Überdachung?", a: "Das hängt von Bauform, Nutzung und Standort ab. Deutliche Reduktionen bei Heizbedarf und Verdunstung sind aber typisch, weil Wärme und Wasser im System bleiben." },
+  { q: "Beeinträchtigt die Überdachung die Poolreinigung?", a: "Im Gegenteil: Da erheblich weniger Laub, Pollen und Staub ins Wasser gelangen, sinkt der Reinigungsaufwand spürbar." },
+  { q: "Welche Farben und Ausführungen sind erhältlich?", a: "Aluminiumprofile sind in verschiedenen RAL-Farben verfügbar. Anthrazit und Weiß gehören zu den am häufigsten gewählten Ausführungen." },
+  { q: "Wie lange dauert die Montage?", a: "Je nach Modell und Größe zwischen einem und mehreren Tagen. Wichtig ist eine exakte Ausrichtung der Führungen, damit die Elemente dauerhaft leichtgängig bleiben." },
+  { q: "Kann die Überdachung im Winter draußen bleiben?", a: "Ja, die meisten Anlagen sind ganzjährig einsetzbar. Bei starkem Schneefall sollte die Last gemäß Herstellerangabe abgetragen werden." },
+  { q: "Wie nachhaltig ist eine Poolüberdachung?", a: "Sie reduziert Wasserverdunstung, Heizenergie und Chemikalieneinsatz. Zusätzlich schont eine reparaturfähige Konstruktion Ressourcen, weil einzelne Bauteile statt der gesamten Anlage getauscht werden." },
+  { q: "Woran erkenne ich gute Verarbeitungsqualität?", a: "An sauber verschweißten oder verschraubten Profilen, gleichmäßigen Spaltmaßen, leichtgängigen Elementen, gut sitzenden Dichtungen und einer nachvollziehbaren Dokumentation der verbauten Komponenten." },
 ];
 
 export const Route = createFileRoute("/faq")({
@@ -40,21 +45,25 @@ export const Route = createFileRoute("/faq")({
       { name: "description", content: DESCRIPTION },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
-      { property: "og:url", content: "/faq" },
+      { property: "og:type", content: "article" },
+      { property: "og:url", content: `${SITE_URL}/faq` },
     ],
-    links: [{ rel: "canonical", href: "/faq" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/faq` }],
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: faqs.map((f) => ({
-            "@type": "Question",
-            name: f.q,
-            acceptedAnswer: { "@type": "Answer", text: f.a },
-          })),
-        }),
+        children: JSON.stringify([
+          breadcrumbJsonLd(crumbs),
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqs.map((f) => ({
+              "@type": "Question",
+              name: f.q,
+              acceptedAnswer: { "@type": "Answer", text: f.a },
+            })),
+          },
+        ]),
       },
     ],
   }),
@@ -65,10 +74,11 @@ function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
   return (
     <>
+      <Breadcrumbs items={crumbs} />
       <PageHero
         eyebrow="Häufige Fragen"
-        title="Antworten auf über 20 Fragen rund um Poolüberdachungen"
-        subtitle="Kompakt, verständlich und ehrlich. Sollten Sie eine Frage vermissen, sprechen Sie uns gern an."
+        title="Antworten rund um Poolüberdachungen"
+        subtitle="Kompakt, verständlich und sachlich. Sollte eine Frage fehlen, sprechen Sie uns gern an."
       />
 
       <section className="container-x mt-14">
@@ -83,9 +93,7 @@ function FAQ() {
                   className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors hover:bg-mist"
                   aria-expanded={isOpen}
                 >
-                  <span className="text-base font-medium text-foreground md:text-lg">
-                    {f.q}
-                  </span>
+                  <span className="text-base font-medium text-foreground md:text-lg">{f.q}</span>
                   <ChevronDown
                     className={`h-5 w-5 shrink-0 text-muted-foreground transition-transform ${
                       isOpen ? "rotate-180 text-primary" : ""
@@ -107,10 +115,7 @@ function FAQ() {
         </div>
       </section>
 
-      <CTASection
-        title="Ihre Frage nicht dabei?"
-        subtitle="Kontaktieren Sie uns oder direkt Paradiso – Sie erhalten schnell eine persönliche Antwort."
-      />
+      <ParadisoFazit text="Viele Fragen laufen auf denselben Punkt hinaus: Wie lange bleibt die Anlage funktionsfähig? Entscheidend sind Verarbeitung, Wartbarkeit und die Verfügbarkeit von Ersatzteilen." />
     </>
   );
 }

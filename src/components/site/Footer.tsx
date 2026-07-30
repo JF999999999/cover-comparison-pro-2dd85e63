@@ -14,16 +14,15 @@ export function Footer() {
             <span className="text-sm font-semibold">{SITE_NAME}</span>
           </div>
           <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
-            Ein Informations- und Vergleichsportal rund um Poolüberdachungen. Diese Seite
-            wird in Zusammenarbeit mit Paradiso betrieben. Unser Ziel: Orientierung,
-            Transparenz und fundierte Entscheidungshilfen.
+            Unabhängiges Informationsportal rund um Poolüberdachungen: Bauformen, Technik,
+            Materialien, Pflege und Ersatzteile – sachlich aufbereitet und ohne Preisangaben.
           </p>
         </div>
 
         <div>
-          <h4 className="text-sm font-semibold text-foreground">Inhalte</h4>
+          <h2 className="text-sm font-semibold text-foreground">Inhalte</h2>
           <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-            {NAV_LINKS.slice(1, 6).map((l) => (
+            {NAV_LINKS.slice(1, 8).map((l) => (
               <li key={l.to}>
                 <Link to={l.to} className="hover:text-foreground">
                   {l.label}
@@ -34,7 +33,7 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="text-sm font-semibold text-foreground">Rechtliches</h4>
+          <h2 className="text-sm font-semibold text-foreground">Rechtliches</h2>
           <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
             <li>
               <Link to="/impressum" className="hover:text-foreground">
@@ -47,6 +46,11 @@ export function Footer() {
               </Link>
             </li>
             <li>
+              <Link to="/ueber-diese-website" className="hover:text-foreground">
+                Über diese Website
+              </Link>
+            </li>
+            <li>
               <Link to="/kontakt" className="hover:text-foreground">
                 Kontakt
               </Link>
@@ -55,10 +59,10 @@ export function Footer() {
               <a
                 href={PARADISO_URL}
                 target="_blank"
-                rel="noopener noreferrer sponsored"
+                rel="noopener noreferrer"
                 className="hover:text-foreground"
               >
-                Offizielle Paradiso Website ↗
+                Paradiso Website ↗
               </a>
             </li>
           </ul>
@@ -69,8 +73,8 @@ export function Footer() {
         <div className="container-x flex flex-col items-start justify-between gap-2 py-6 text-xs text-muted-foreground md:flex-row md:items-center">
           <span>© {year} {SITE_NAME}. Alle Rechte vorbehalten.</span>
           <span>
-            Transparenzhinweis: Diese Seite arbeitet mit Paradiso zusammen. Vergleiche
-            basieren auf öffentlich verfügbaren Informationen.
+            Kooperationshinweis: Diese Website entsteht in Zusammenarbeit mit Paradiso.
+            Bildmaterial wird mit Genehmigung verwendet.
           </span>
         </div>
       </div>

@@ -74,9 +74,9 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
-const TITLE = "Poolüberdachung Vergleich – Modelle, Preise & Ratgeber";
+const TITLE = "Poolüberdachungen – Modelle, Technik und Ratgeber";
 const DESCRIPTION =
-  "Vergleichen Sie Poolüberdachungen: Material, Qualität, Ausstattung und Preis-Leistung verschiedener Anbieter. Unabhängiger Ratgeber, Modellübersicht und FAQ.";
+  "Informationsportal zu Poolüberdachungen: Bauformen, schienenlose Systeme, Materialien, Sicherheit, Wärmeschutz, Pflege, Wartung und Ersatzteile.";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
@@ -85,24 +85,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: TITLE },
       { name: "description", content: DESCRIPTION },
-      { name: "author", content: "Poolüberdachung Vergleich" },
+      { name: "author", content: "Poolüberdachung Ratgeber" },
       { name: "theme-color", content: "#1a2440" },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "Poolüberdachung Vergleich" },
+      { property: "og:site_name", content: "Poolüberdachung Ratgeber" },
       { property: "og:locale", content: "de_DE" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: TITLE },
-      { name: "twitter:description", content: DESCRIPTION },
-      { title: "Paradiso" },
-      { property: "og:title", content: "Paradiso" },
-      { name: "twitter:title", content: "Paradiso" },
-      { name: "description", content: "Vergleichen Sie Poolüberdachungen objektiv, um die beste Wahl für Ihren Pool zu treffen." },
-      { property: "og:description", content: "Vergleichen Sie Poolüberdachungen objektiv, um die beste Wahl für Ihren Pool zu treffen." },
-      { name: "twitter:description", content: "Vergleichen Sie Poolüberdachungen objektiv, um die beste Wahl für Ihren Pool zu treffen." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3fb8c95b-edd4-4c12-9962-91bbbad2488f/id-preview-2dd28ceb--4d42ee88-3f86-484a-a6dc-88e6119ad6e5.lovable.app-1784522532717.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3fb8c95b-edd4-4c12-9962-91bbbad2488f/id-preview-2dd28ceb--4d42ee88-3f86-484a-a6dc-88e6119ad6e5.lovable.app-1784522532717.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -117,16 +105,33 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          name: "Poolüberdachung Vergleich",
-          inLanguage: "de-DE",
-          description: DESCRIPTION,
-        }),
+        children: JSON.stringify([
+          {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "Poolüberdachung Ratgeber",
+            url: "https://cover-comparison-pro.lovable.app",
+            inLanguage: "de-DE",
+            description: DESCRIPTION,
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "Poolüberdachung Ratgeber",
+            url: "https://cover-comparison-pro.lovable.app",
+            founder: { "@type": "Person", name: "Carsten Fels" },
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Neuried",
+              postalCode: "77743",
+              addressCountry: "DE",
+            },
+          },
+        ]),
       },
     ],
   }),
+
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
