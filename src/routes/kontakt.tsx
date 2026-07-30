@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Mail, MapPin, ArrowUpRight } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { Breadcrumbs, breadcrumbJsonLd } from "@/components/site/Breadcrumbs";
-import { PARADISO_URL, SITE_URL } from "@/lib/site";
+import { CONTACT_EMAIL, PARADISO_URL, SITE_URL } from "@/lib/site";
 
 const TITLE = "Kontakt – Poolüberdachung Ratgeber";
 const DESCRIPTION =
