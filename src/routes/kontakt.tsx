@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Mail, MapPin, ArrowUpRight } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { Breadcrumbs, breadcrumbJsonLd } from "@/components/site/Breadcrumbs";
-import { PARADISO_URL, SITE_URL } from "@/lib/site";
+import { CONTACT_EMAIL, PARADISO_URL, SITE_URL } from "@/lib/site";
 
 const TITLE = "Kontakt – Poolüberdachung Ratgeber";
 const DESCRIPTION =
@@ -57,13 +57,12 @@ function Kontakt() {
             </li>
             <li className="flex gap-3">
               <Mail className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
-              <span>
-                Die vollständigen Kontaktdaten finden Sie im{" "}
-                <a href="/impressum" className="text-primary underline-offset-4 hover:underline">
-                  Impressum
-                </a>
-                .
-              </span>
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="text-primary underline-offset-4 hover:underline"
+              >
+                {CONTACT_EMAIL}
+              </a>
             </li>
           </ul>
         </div>

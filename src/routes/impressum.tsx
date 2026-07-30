@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
-import { SITE_URL } from "@/lib/site";
+import { CONTACT_EMAIL, SITE_URL } from "@/lib/site";
 
 const TITLE = "Impressum – Poolüberdachung Ratgeber";
 const DESCRIPTION = "Angaben gemäß § 5 DDG und Verantwortlichkeit für den Inhalt dieser Website.";
@@ -40,11 +40,12 @@ function Impressum() {
           <div>
             <h2 className="text-2xl text-foreground">Kontakt</h2>
             <p className="mt-3">
-              Kontaktaufnahme bitte über die auf der{" "}
-              <a href="/kontakt" className="text-primary underline-offset-4 hover:underline">
-                Kontaktseite
-              </a>{" "}
-              genannten Wege. Telefonnummer und E-Mail-Adresse werden vom Betreiber ergänzt.
+              E-Mail:{" "}
+              <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary underline-offset-4 hover:underline">
+                {CONTACT_EMAIL}
+              </a>
+              <br />
+              Telefonnummer und weitere Kontaktdaten werden vom Betreiber ergänzt.
             </p>
           </div>
 
