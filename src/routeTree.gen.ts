@@ -11,7 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VorteileRouteImport } from './routes/vorteile'
 import { Route as VergleichRouteImport } from './routes/vergleich'
-import { Route as UeberUnsRouteImport } from './routes/ueber-uns'
 import { Route as UeberDieseWebsiteRouteImport } from './routes/ueber-diese-website'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SchienenlosePoolueberdachungenRouteImport } from './routes/schienenlose-poolueberdachungen'
@@ -33,11 +32,6 @@ const VorteileRoute = VorteileRouteImport.update({
 const VergleichRoute = VergleichRouteImport.update({
   id: '/vergleich',
   path: '/vergleich',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const UeberUnsRoute = UeberUnsRouteImport.update({
-  id: '/ueber-uns',
-  path: '/ueber-uns',
   getParentRoute: () => rootRouteImport,
 } as any)
 const UeberDieseWebsiteRoute = UeberDieseWebsiteRouteImport.update({
@@ -115,7 +109,6 @@ export interface FileRoutesByFullPath {
   '/schienenlose-poolueberdachungen': typeof SchienenlosePoolueberdachungenRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/ueber-diese-website': typeof UeberDieseWebsiteRoute
-  '/ueber-uns': typeof UeberUnsRoute
   '/vergleich': typeof VergleichRoute
   '/vorteile': typeof VorteileRoute
 }
@@ -132,7 +125,6 @@ export interface FileRoutesByTo {
   '/schienenlose-poolueberdachungen': typeof SchienenlosePoolueberdachungenRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/ueber-diese-website': typeof UeberDieseWebsiteRoute
-  '/ueber-uns': typeof UeberUnsRoute
   '/vergleich': typeof VergleichRoute
   '/vorteile': typeof VorteileRoute
 }
@@ -150,7 +142,6 @@ export interface FileRoutesById {
   '/schienenlose-poolueberdachungen': typeof SchienenlosePoolueberdachungenRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/ueber-diese-website': typeof UeberDieseWebsiteRoute
-  '/ueber-uns': typeof UeberUnsRoute
   '/vergleich': typeof VergleichRoute
   '/vorteile': typeof VorteileRoute
 }
@@ -169,7 +160,6 @@ export interface FileRouteTypes {
     | '/schienenlose-poolueberdachungen'
     | '/sitemap.xml'
     | '/ueber-diese-website'
-    | '/ueber-uns'
     | '/vergleich'
     | '/vorteile'
   fileRoutesByTo: FileRoutesByTo
@@ -186,7 +176,6 @@ export interface FileRouteTypes {
     | '/schienenlose-poolueberdachungen'
     | '/sitemap.xml'
     | '/ueber-diese-website'
-    | '/ueber-uns'
     | '/vergleich'
     | '/vorteile'
   id:
@@ -203,7 +192,6 @@ export interface FileRouteTypes {
     | '/schienenlose-poolueberdachungen'
     | '/sitemap.xml'
     | '/ueber-diese-website'
-    | '/ueber-uns'
     | '/vergleich'
     | '/vorteile'
   fileRoutesById: FileRoutesById
@@ -221,7 +209,6 @@ export interface RootRouteChildren {
   SchienenlosePoolueberdachungenRoute: typeof SchienenlosePoolueberdachungenRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   UeberDieseWebsiteRoute: typeof UeberDieseWebsiteRoute
-  UeberUnsRoute: typeof UeberUnsRoute
   VergleichRoute: typeof VergleichRoute
   VorteileRoute: typeof VorteileRoute
 }
@@ -240,13 +227,6 @@ declare module '@tanstack/react-router' {
       path: '/vergleich'
       fullPath: '/vergleich'
       preLoaderRoute: typeof VergleichRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/ueber-uns': {
-      id: '/ueber-uns'
-      path: '/ueber-uns'
-      fullPath: '/ueber-uns'
-      preLoaderRoute: typeof UeberUnsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ueber-diese-website': {
@@ -349,10 +329,19 @@ const rootRouteChildren: RootRouteChildren = {
   SchienenlosePoolueberdachungenRoute: SchienenlosePoolueberdachungenRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   UeberDieseWebsiteRoute: UeberDieseWebsiteRoute,
-  UeberUnsRoute: UeberUnsRoute,
   VergleichRoute: VergleichRoute,
   VorteileRoute: VorteileRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
